@@ -2,66 +2,67 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#05050a">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>VEV-1</title>
+<title>VEV-1 · الكيان السوداوي</title>
 <style>
 :root{
-  --bg:#05050a;--surface:rgba(20,20,30,.72);--glass:rgba(28,28,42,.55);
-  --glass-b:rgba(255,255,255,.09);--glass-hi:rgba(255,255,255,.14);
-  --border:rgba(255,255,255,.07);--text:#d0d0dc;--dim:#6a6a7a;
-  --accent:#c93030;--accent-2:#8b1a1a;--accent-glow:rgba(201,48,48,.45);
-  --ok:#3a7a4a;--warn:#e0a020;--err:#e05555;
-  --bubble-user:linear-gradient(135deg,#1a1a2e,#22223a);
-  --bubble-ai:linear-gradient(135deg,#120808,#1e0d0d);
-  --spring:cubic-bezier(0.34,1.56,0.64,1);
-  --smooth:cubic-bezier(0.16,1,0.3,1);
-  --ease:cubic-bezier(0.4,0,0.2,1);
-  --radius:14px;--radius-lg:20px;--radius-2xl:28px;
-  --shadow:0 8px 32px rgba(0,0,0,.4);
-  --shadow-lg:0 20px 60px rgba(0,0,0,.55);
-  --safe-top:env(safe-area-inset-top,0px);
-  --safe-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#05050a;--glass:rgba(22,22,35,.42);--glass-b:rgba(255,255,255,.14);
+  --glass-hi:rgba(255,255,255,.22);--border:rgba(255,255,255,.08);
+  --text:#d4d4e0;--dim:#7a7a8c;--accent:#c93030;--accent-glow:rgba(201,48,48,.45);
+  --ok:#3a9a5a;--warn:#e0a020;--err:#e05555;
+  --bubble-user:linear-gradient(135deg,#1c1c32,#262640);
+  --bubble-ai:linear-gradient(135deg,#140909,#221010);
+  --spring:cubic-bezier(.34,1.56,.64,1);--smooth:cubic-bezier(.16,1,.3,1);
+  --ease:cubic-bezier(.25,1,.5,1);--radius:14px;--radius-lg:20px;--radius-2xl:28px;
+  --shadow:0 8px 32px rgba(0,0,0,.42);
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
 }
 [data-theme="light"]{
-  --bg:#f0f0f5;--surface:rgba(255,255,255,.85);--glass:rgba(255,255,255,.6);
-  --glass-b:rgba(0,0,0,.08);--glass-hi:rgba(0,0,0,.04);
-  --border:rgba(0,0,0,.1);--text:#1a1a2e;--dim:#7a7a8a;
-  --bubble-user:linear-gradient(135deg,#e0e0ea,#d0d0da);
-  --bubble-ai:linear-gradient(135deg,#f5eaea,#f0dede);
-  --shadow:0 8px 32px rgba(0,0,0,.12);
+  --bg:#eef0f5;--glass:rgba(255,255,255,.55);--glass-b:rgba(0,0,0,.08);
+  --border:rgba(0,0,0,.1);--text:#1a1a2e;--dim:#6a6a7a;
+  --bubble-user:linear-gradient(135deg,#e2e2ee,#d2d2de);
+  --bubble-ai:linear-gradient(135deg,#f6ecec,#f2e0e0);
+  --shadow:0 8px 32px rgba(0,0,0,.10);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;font-family:-apple-system,'SF Pro Display','Segoe UI',Tahoma,sans-serif}
-html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;transition:background .4s var(--ease),color .4s var(--ease);overscroll-behavior:none}
-button{font:inherit}
-input,textarea{font:inherit}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;transition:background .45s var(--ease),color .45s var(--ease);overscroll-behavior:none}
+button{font:inherit;color:inherit}
+input,textarea{font:inherit;color:inherit}
+#neural-canvas{position:fixed;inset:0;z-index:0;opacity:.28;pointer-events:none}
+[data-theme="light"] #neural-canvas{opacity:.14}
 
-#neural-canvas{position:fixed;inset:0;z-index:0;opacity:.3;pointer-events:none}
-[data-theme="light"] #neural-canvas{opacity:.15}
+/* Liquid Glass — iOS 26 */
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(42px) saturate(200%);
+  -webkit-backdrop-filter:blur(42px) saturate(200%);
+  border:1px solid var(--glass-b);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,.37),
+    inset 0 1.5px 0 rgba(255,255,255,.7),
+    inset 0 -1px 0 rgba(255,255,255,.08);
+  transition:background .35s var(--ease),box-shadow .35s var(--ease);
+}
 
-/* ============ SETUP BANNER ============ */
 .setup-banner{
   position:fixed;top:0;left:0;right:0;z-index:999;
-  background:linear-gradient(90deg,#8b1a1a,#c93030);
-  color:#fff;padding:calc(var(--safe-top) + 10px) 16px 10px;
-  text-align:center;font-size:13px;font-weight:600;
-  box-shadow:0 4px 20px rgba(201,48,48,.4);
+  background:linear-gradient(90deg,#8b1a1a,#c93030);color:#fff;
+  padding:calc(var(--safe-top) + 10px) 16px 10px;text-align:center;
+  font-size:13px;font-weight:600;box-shadow:0 4px 20px rgba(201,48,48,.4);
   animation:slideDown .5s var(--spring);
 }
 @keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
-.setup-banner button{background:rgba(255,255,255,.2);border:none;color:#fff;padding:4px 10px;border-radius:6px;margin-right:8px;cursor:pointer;font-size:12px}
+.setup-banner button{background:rgba(255,255,255,.22);border:none;padding:4px 10px;border-radius:6px;margin-right:8px;cursor:pointer;font-size:12px}
 
-/* ============ CHAT SCREEN ============ */
 #chat-screen{position:fixed;inset:0;z-index:2;display:flex;flex-direction:column;height:100vh}
 
 .float-header{
   position:absolute;top:calc(var(--safe-top) + 12px);left:12px;right:12px;z-index:10;
-  background:var(--glass);backdrop-filter:blur(30px) saturate(180%);
-  -webkit-backdrop-filter:blur(30px) saturate(180%);
-  border:1px solid var(--glass-b);border-radius:var(--radius-lg);
-  padding:10px 14px;display:flex;align-items:center;justify-content:space-between;
-  box-shadow:var(--shadow);animation:dropIn .6s var(--spring) both;
+  border-radius:var(--radius-lg);padding:10px 14px;
+  display:flex;align-items:center;justify-content:space-between;
+  animation:dropIn .6s var(--spring) both;
 }
 @keyframes dropIn{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
 .hdr-left{display:flex;flex-direction:column;gap:2px}
@@ -77,12 +78,7 @@ input,textarea{font:inherit}
 [data-theme="light"] .pill{background:rgba(0,0,0,.05)}
 .trust-bar-sm{width:36px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
 .trust-fill-sm{height:100%;background:linear-gradient(90deg,#8b1a1a,#c93030);border-radius:2px;transition:width .5s var(--ease)}
-.icon-btn{
-  width:34px;height:34px;border-radius:50%;border:1px solid var(--glass-b);
-  background:rgba(255,255,255,.05);color:var(--text);
-  display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;
-  transition:transform .3s var(--spring),background .3s;
-}
+.icon-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--glass-b);background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:transform .25s var(--spring),background .25s}
 .icon-btn:active{transform:scale(.88)}
 .icon-btn:hover{background:rgba(255,255,255,.12)}
 
@@ -91,41 +87,43 @@ input,textarea{font:inherit}
   padding:calc(var(--safe-top) + 90px) 16px 160px;
   display:flex;flex-direction:column;gap:12px;
   scroll-behavior:smooth;-webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;
 }
 #messages::-webkit-scrollbar{width:4px}
 #messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 
-.msg-row{display:flex;flex-direction:column;gap:4px;max-width:82%;animation:msgIn .45s var(--smooth) both;transition:transform .3s var(--spring)}
+.msg-row{display:flex;flex-direction:column;gap:4px;max-width:82%;animation:msgIn .45s var(--smooth) both;transition:transform .3s var(--spring);position:relative}
 .msg-row.user{align-self:flex-start;align-items:flex-start}
 .msg-row.ai{align-self:flex-end;align-items:flex-end}
 @keyframes msgIn{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
-
 .bubble{
   padding:12px 16px;border-radius:var(--radius-lg);line-height:1.7;
-  font-size:15px;word-wrap:break-word;white-space:pre-wrap;
+  font-size:15px;word-wrap:break-word;
   position:relative;cursor:pointer;transition:transform .15s var(--ease);
-  user-select:text;-webkit-user-select:text;
-  touch-action:pan-y;
+  user-select:text;-webkit-user-select:text;touch-action:pan-y;
+  white-space:normal;
 }
-.msg-row.user .bubble{background:var(--bubble-user);border:1px solid rgba(255,255,255,.06);border-bottom-right-radius:4px}
+.bubble:active{transform:scale(.99)}
+.msg-row.user .bubble{background:var(--bubble-user);border:1px solid rgba(255,255,255,.06);border-bottom-right-radius:4px;white-space:pre-wrap}
 .msg-row.ai .bubble{background:var(--bubble-ai);border:1px solid rgba(201,48,48,.15);border-bottom-left-radius:4px;color:#d8c8c8}
 [data-theme="light"] .msg-row.ai .bubble{color:#2a1a1a}
 .bubble.silence{font-size:28px;color:var(--accent);padding:2px 20px;font-weight:800;text-align:center}
-.bubble.streaming::after{content:'▍';color:var(--accent);animation:blink 1s infinite}
+.bubble.streaming::after{content:'▍';color:var(--accent);animation:blink 1s infinite;margin-right:2px}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
-
-/* Swipe-to-reply indicator */
-.swipe-hint{
-  position:absolute;top:50%;transform:translateY(-50%);
-  left:-40px;font-size:22px;color:var(--accent);
-  opacity:0;transition:opacity .2s;pointer-events:none;
-}
-.msg-row.user .swipe-hint{left:auto;right:-40px}
-
+/* Markdown داخل الفقاعات */
+.bubble pre{background:rgba(0,0,0,.4);border:1px solid var(--border);border-radius:10px;padding:10px;margin:8px 0;overflow-x:auto;font-family:monospace;font-size:12px;line-height:1.5;direction:ltr;text-align:left}
+.bubble code{background:rgba(0,0,0,.4);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.9em;direction:ltr;display:inline-block}
+.bubble strong{color:var(--accent);font-weight:700}
+.bubble em{color:var(--dim);font-style:italic}
+.bubble ul,.bubble ol{margin:8px 0;padding-right:20px}
+.bubble li{margin:4px 0}
+.bubble a{color:var(--accent);text-decoration:underline}
 .msg-meta{font-size:10px;color:var(--dim);opacity:.6;padding:0 6px;display:flex;gap:8px;align-items:center}
 .reply-quote{background:rgba(201,48,48,.1);border-right:2px solid var(--accent);padding:6px 10px;border-radius:8px;font-size:12px;color:var(--dim);margin-bottom:4px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .msg-image-preview{max-width:220px;border-radius:12px;margin-bottom:6px;display:block;border:1px solid var(--border)}
 .highlight{background:rgba(201,48,48,.3);border-radius:3px;padding:0 2px}
+.swipe-hint{position:absolute;top:50%;transform:translateY(-50%);left:-40px;font-size:22px;color:var(--accent);opacity:0;transition:opacity .2s;pointer-events:none}
+.msg-row.user .swipe-hint{left:auto;right:-40px}
 
 .typing{display:none;align-self:flex-end;background:var(--bubble-ai);border:1px solid rgba(201,48,48,.15);padding:14px 18px;border-radius:var(--radius-lg);border-bottom-left-radius:4px;gap:5px;max-width:82%;flex-direction:column;animation:msgIn .3s var(--smooth)}
 .typing.active{display:flex}
@@ -138,116 +136,50 @@ input,textarea{font:inherit}
 
 .input-bar{
   position:absolute;bottom:calc(var(--safe-bottom) + 12px);left:12px;right:12px;z-index:10;
-  background:var(--glass);backdrop-filter:blur(30px) saturate(180%);
-  -webkit-backdrop-filter:blur(30px) saturate(180%);
-  border:1px solid var(--glass-b);border-radius:var(--radius-2xl);
-  padding:8px;display:flex;align-items:flex-end;gap:6px;
-  box-shadow:var(--shadow);
+  border-radius:var(--radius-2xl);padding:8px;
+  display:flex;align-items:flex-end;gap:6px;
   animation:riseIn .6s var(--spring) both;
 }
 @keyframes riseIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.attach-btn,.mic-btn{
-  width:40px;height:40px;border-radius:50%;border:none;
-  background:rgba(255,255,255,.06);color:var(--text);
-  display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;flex-shrink:0;
-  transition:transform .3s var(--spring),background .3s;
-}
+.attach-btn,.mic-btn{width:40px;height:40px;border-radius:50%;border:none;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;flex-shrink:0;transition:transform .25s var(--spring),background .25s}
 .attach-btn:active,.mic-btn:active{transform:scale(.85)}
+.attach-btn:hover,.mic-btn:hover{background:rgba(255,255,255,.12)}
 .attach-btn.rotated{transform:rotate(45deg)}
 .mic-btn.recording{background:var(--accent);color:#fff;animation:micPulse 1.2s infinite}
 @keyframes micPulse{0%,100%{box-shadow:0 0 0 0 var(--accent-glow)}50%{box-shadow:0 0 0 12px transparent}}
-#user-input{
-  flex:1;padding:12px 14px;border-radius:18px;
-  border:1px solid var(--border);background:rgba(0,0,0,.2);
-  color:var(--text);font-size:15px;resize:none;
-  max-height:120px;min-height:40px;line-height:1.5;
-  transition:all .3s var(--ease);
-}
+#user-input{flex:1;padding:12px 14px;border-radius:18px;border:1px solid var(--border);background:rgba(0,0,0,.2);font-size:15px;resize:none;max-height:120px;min-height:40px;line-height:1.5;transition:all .3s var(--ease)}
 [data-theme="light"] #user-input{background:rgba(0,0,0,.04)}
 #user-input:focus{outline:none;border-color:var(--accent);background:rgba(0,0,0,.3)}
-.send-btn{
-  width:44px;height:44px;border-radius:50%;border:none;
-  background:linear-gradient(135deg,#c93030,#8b1a1a);color:#fff;
-  font-size:20px;cursor:pointer;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 20px var(--accent-glow);
-  transition:transform .3s var(--spring),box-shadow .3s var(--ease);
-}
+.send-btn{width:44px;height:44px;border-radius:50%;border:none;background:linear-gradient(135deg,#c93030,#8b1a1a);color:#fff;font-size:20px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px var(--accent-glow);transition:transform .25s var(--spring),box-shadow .25s var(--ease)}
 .send-btn:hover:not(:disabled){transform:scale(1.08)}
 .send-btn:active:not(:disabled){transform:scale(.9)}
 .send-btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
 
-.attach-menu{
-  position:absolute;bottom:calc(var(--safe-bottom) + 76px);left:12px;z-index:11;
-  display:flex;flex-direction:column;gap:8px;
-  opacity:0;pointer-events:none;transform:scale(.8) translateY(20px);
-  transform-origin:bottom left;transition:all .3s var(--spring);
-}
+.attach-menu{position:absolute;bottom:calc(var(--safe-bottom) + 76px);left:12px;z-index:11;display:flex;flex-direction:column;gap:8px;opacity:0;pointer-events:none;transform:scale(.8) translateY(20px);transform-origin:bottom left;transition:all .3s var(--spring)}
 .attach-menu.open{opacity:1;pointer-events:auto;transform:scale(1) translateY(0)}
-.attach-item{
-  background:var(--surface);backdrop-filter:blur(30px) saturate(180%);
-  -webkit-backdrop-filter:blur(30px) saturate(180%);
-  border:1px solid var(--glass-b);border-radius:var(--radius);
-  padding:10px 14px;display:flex;align-items:center;gap:10px;
-  cursor:pointer;font-size:14px;color:var(--text);white-space:nowrap;
-}
+.attach-item{border-radius:var(--radius);padding:10px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;white-space:nowrap}
 .attach-item:active{transform:scale(.95)}
 
-.reply-banner{
-  position:absolute;bottom:calc(var(--safe-bottom) + 70px);left:12px;right:12px;z-index:9;
-  background:var(--glass);backdrop-filter:blur(20px) saturate(180%);
-  -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border:1px solid var(--glass-b);border-right:3px solid var(--accent);
-  border-radius:12px;padding:8px 12px;
-  display:none;align-items:center;justify-content:space-between;
-  font-size:12px;color:var(--dim);animation:slideUpSmall .3s var(--spring);
-}
+.reply-banner{position:absolute;bottom:calc(var(--safe-bottom) + 70px);left:12px;right:12px;z-index:9;border-radius:12px;border-right:3px solid var(--accent);padding:8px 12px;display:none;align-items:center;justify-content:space-between;font-size:12px;color:var(--dim);animation:slideUpSmall .3s var(--spring)}
 .reply-banner.active{display:flex}
 @keyframes slideUpSmall{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .reply-banner .txt{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.reply-close{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:var(--text);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.reply-close{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.08);border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
 
-.img-preview-bar{
-  position:absolute;bottom:calc(var(--safe-bottom) + 70px);right:12px;z-index:9;
-  background:var(--glass);backdrop-filter:blur(20px) saturate(180%);
-  -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border:1px solid var(--glass-b);border-radius:12px;padding:8px;
-  display:none;align-items:center;gap:8px;animation:slideUpSmall .3s var(--spring);
-}
+.img-preview-bar{position:absolute;bottom:calc(var(--safe-bottom) + 70px);right:12px;z-index:9;border-radius:12px;padding:8px;display:none;align-items:center;gap:8px;animation:slideUpSmall .3s var(--spring)}
 .img-preview-bar.active{display:flex}
 .img-preview-bar img{width:44px;height:44px;border-radius:8px;object-fit:cover}
 
-/* ============ SHEETS with drag-to-dismiss ============ */
-.overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.55);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  z-index:100;opacity:0;pointer-events:none;transition:opacity .3s var(--ease);
-}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:100;opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
 .overlay.active{opacity:1;pointer-events:auto}
-
-.sheet{
-  position:fixed;bottom:0;left:0;right:0;z-index:101;
-  background:var(--surface);backdrop-filter:blur(40px) saturate(180%);
-  -webkit-backdrop-filter:blur(40px) saturate(180%);
-  border-top:1px solid var(--glass-b);
-  border-radius:var(--radius-2xl) var(--radius-2xl) 0 0;
-  padding:12px 20px calc(var(--safe-bottom) + 24px);
-  transform:translateY(100%);transition:transform .45s var(--spring);
-  max-height:85vh;overflow-y:auto;box-shadow:0 -10px 60px rgba(0,0,0,.6);
-}
+.sheet{position:fixed;bottom:0;left:0;right:0;z-index:101;border-radius:var(--radius-2xl) var(--radius-2xl) 0 0;border-top:1px solid var(--glass-b);padding:12px 20px calc(var(--safe-bottom) + 24px);transform:translateY(100%);transition:transform .45s var(--spring);max-height:85vh;overflow-y:auto;box-shadow:0 -10px 60px rgba(0,0,0,.6)}
 .sheet.open{transform:translateY(0)}
-.sheet.dragging{transition:none}
-.sheet-handle{
-  width:40px;height:5px;background:rgba(255,255,255,.2);border-radius:3px;
-  margin:0 auto 16px;cursor:grab;padding:12px 0;background-clip:content-box;
-  touch-action:none;
-}
-.sheet-handle:active{cursor:grabbing}
+.sheet-handle{width:40px;height:5px;background:rgba(255,255,255,.2);border-radius:3px;margin:0 auto 16px;cursor:grab;padding:12px 0;background-clip:content-box;touch-action:none}
 [data-theme="light"] .sheet-handle{background:rgba(0,0,0,.2);background-clip:content-box}
 .sheet-title{font-size:1.15rem;font-weight:800;margin-bottom:20px}
-.sheet-item{padding:14px 12px;display:flex;align-items:center;gap:14px;cursor:pointer;border-radius:var(--radius);transition:background .3s;color:var(--text)}
-.sheet-item:hover{background:rgba(255,255,255,.06)}
-[data-theme="light"] .sheet-item:hover{background:rgba(0,0,0,.04)}
+.sheet-item{padding:14px 12px;display:flex;align-items:center;gap:14px;cursor:pointer;border-radius:var(--radius);transition:background .25s,transform .15s}
+.sheet-item:active{transform:scale(.98);background:rgba(255,255,255,.08)}
+[data-theme="light"] .sheet-item:active{background:rgba(0,0,0,.05)}
 .sheet-item .ico{font-size:22px;width:32px;text-align:center}
 .sheet-item .info{flex:1;display:flex;flex-direction:column;gap:2px}
 .sheet-item .label{font-size:15px;font-weight:500}
@@ -262,99 +194,57 @@ input,textarea{font:inherit}
 [dir="rtl"] .toggle.on::after{transform:translateX(-20px)}
 .divider{height:1px;background:var(--border);margin:8px 0}
 
-/* ============ API DIAGNOSTIC ============ */
-.diag-box{
-  background:rgba(0,0,0,.3);border:1px solid var(--border);
-  border-radius:12px;padding:12px;margin:8px 0;
-  font-family:monospace;font-size:12px;line-height:1.5;
-  color:var(--dim);word-break:break-all;max-height:200px;overflow-y:auto;
-}
+.provider-row{display:flex;gap:8px;margin:8px 0}
+.provider-chip{flex:1;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:4px;border:1px solid var(--border);background:rgba(0,0,0,.2);font-size:12px}
+[data-theme="light"] .provider-chip{background:rgba(0,0,0,.04)}
+.provider-chip .pname{font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px}
+.provider-chip .pdot{width:8px;height:8px;border-radius:50%;background:var(--dim)}
+.provider-chip .pdot.on{background:var(--ok)}
+.provider-chip .pdot.dead{background:var(--err)}
+.provider-chip .pdot.cool{background:var(--warn)}
+.provider-chip .pstatus{color:var(--dim);font-size:11px}
+
+.diag-box{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:12px;padding:12px;margin:8px 0;font-family:monospace;font-size:11px;line-height:1.6;color:var(--dim);word-break:break-all;max-height:220px;overflow-y:auto;white-space:pre-wrap}
 [data-theme="light"] .diag-box{background:rgba(0,0,0,.04)}
 .diag-box.ok{color:var(--ok);border-color:var(--ok)}
 .diag-box.err{color:var(--err);border-color:var(--err)}
-.test-btn{
-  background:linear-gradient(135deg,#c93030,#8b1a1a);color:#fff;
-  border:none;padding:10px 20px;border-radius:10px;
-  font-weight:700;cursor:pointer;width:100%;margin-top:8px;
-  transition:transform .15s;
-}
+.test-btn{background:linear-gradient(135deg,#c93030,#8b1a1a);color:#fff;border:none;padding:10px 20px;border-radius:10px;font-weight:700;cursor:pointer;width:100%;margin-top:8px;transition:transform .15s}
 .test-btn:active{transform:scale(.97)}
 
-/* ============ CONTEXT MENU ============ */
-.ctx-menu{
-  position:fixed;z-index:150;min-width:180px;
-  background:var(--surface);backdrop-filter:blur(40px) saturate(180%);
-  -webkit-backdrop-filter:blur(40px) saturate(180%);
-  border:1px solid var(--glass-b);border-radius:var(--radius);
-  padding:6px;display:none;flex-direction:column;gap:2px;
-  box-shadow:var(--shadow-lg);animation:ctxIn .3s var(--spring);
-}
+.ctx-menu{position:fixed;z-index:150;min-width:180px;border-radius:var(--radius);padding:6px;display:none;flex-direction:column;gap:2px;animation:ctxIn .3s var(--spring)}
 .ctx-menu.open{display:flex}
 @keyframes ctxIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
 .ctx-item{padding:10px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;border-radius:8px;font-size:14px}
 .ctx-item:hover{background:rgba(255,255,255,.08)}
 .ctx-item.danger{color:var(--err)}
 
-/* ============ SEARCH ============ */
-.search-bar{
-  position:absolute;top:calc(var(--safe-top) + 70px);left:12px;right:12px;z-index:9;
-  background:var(--glass);backdrop-filter:blur(30px) saturate(180%);
-  -webkit-backdrop-filter:blur(30px) saturate(180%);
-  border:1px solid var(--glass-b);border-radius:var(--radius);
-  padding:8px 12px;display:none;align-items:center;gap:8px;
-  box-shadow:var(--shadow);animation:dropIn .3s var(--spring);
-}
+.search-bar{position:absolute;top:calc(var(--safe-top) + 70px);left:12px;right:12px;z-index:9;border-radius:var(--radius);padding:8px 12px;display:none;align-items:center;gap:8px;animation:dropIn .3s var(--spring)}
 .search-bar.active{display:flex}
-.search-bar input{flex:1;padding:8px;border:none;background:transparent;color:var(--text);font-size:14px}
+.search-bar input{flex:1;padding:8px;border:none;background:transparent;font-size:14px}
 .search-bar input:focus{outline:none}
 .search-count{font-size:12px;color:var(--dim)}
 
-/* ============ TOAST ============ */
-.toast{
-  position:fixed;top:calc(var(--safe-top) + 80px);left:50%;
-  transform:translateX(-50%) translateY(-20px);z-index:200;
-  background:var(--surface);backdrop-filter:blur(30px) saturate(180%);
-  -webkit-backdrop-filter:blur(30px) saturate(180%);
-  border:1px solid var(--glass-b);border-radius:var(--radius);
-  padding:10px 18px;font-size:14px;color:var(--text);
-  box-shadow:var(--shadow);opacity:0;pointer-events:none;
-  transition:all .3s var(--spring);max-width:90vw;
-}
+.toast{position:fixed;top:calc(var(--safe-top) + 80px);left:50%;transform:translateX(-50%) translateY(-20px);z-index:200;border-radius:var(--radius);padding:10px 18px;font-size:14px;opacity:0;pointer-events:none;transition:all .3s var(--spring);max-width:90vw}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-.scroll-bottom{
-  position:absolute;bottom:calc(var(--safe-bottom) + 90px);right:20px;z-index:8;
-  width:42px;height:42px;border-radius:50%;
-  background:var(--surface);backdrop-filter:blur(20px);
-  border:1px solid var(--glass-b);color:var(--accent);
-  display:none;align-items:center;justify-content:center;font-size:18px;
-  cursor:pointer;box-shadow:var(--shadow);
-  transition:transform .3s var(--spring);
-}
+.scroll-bottom{position:absolute;bottom:calc(var(--safe-bottom) + 90px);right:20px;z-index:8;width:42px;height:42px;border-radius:50%;color:var(--accent);display:none;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:transform .3s var(--spring)}
 .scroll-bottom.visible{display:flex;animation:msgIn .3s var(--spring)}
 .scroll-bottom:active{transform:scale(.9)}
 
-@media(max-width:480px){
-  .hdr-badges .pill:nth-child(1){display:none}
-  #messages{padding-left:10px;padding-right:10px}
-  .msg-row{max-width:90%}
-}
-@media(prefers-reduced-motion:reduce){
-  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
-}
+@media(max-width:480px){.hdr-badges .pill:nth-child(1){display:none}#messages{padding-left:10px;padding-right:10px}.msg-row{max-width:90%}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
 
 <canvas id="neural-canvas"></canvas>
 
-<!-- Setup banner (hidden by default) -->
 <div class="setup-banner" id="setup-banner" style="display:none">
-  ⚠️ لم يتم تكوين مفتاح API بعد — <button onclick="document.getElementById('settings-btn').click()">افتح الإعدادات</button>
+  ⚠️ ضع مفاتيح API أولاً — <button onclick="document.getElementById('settings-btn').click()">الإعدادات</button>
 </div>
 
 <div id="chat-screen">
-  <header class="float-header">
+  <header class="float-header glass">
     <div class="hdr-left">
       <div class="hdr-name">VEV-1</div>
       <div class="hdr-status">
@@ -370,7 +260,7 @@ input,textarea{font:inherit}
     </div>
   </header>
 
-  <div class="search-bar" id="search-bar">
+  <div class="search-bar glass" id="search-bar">
     <span>🔍</span>
     <input type="text" id="search-input" placeholder="ابحث...">
     <span class="search-count" id="search-count"></span>
@@ -384,26 +274,26 @@ input,textarea{font:inherit}
     <div class="typing-text" id="typing-text">يكتب...</div>
   </div>
 
-  <div class="reply-banner" id="reply-banner">
+  <div class="reply-banner glass" id="reply-banner">
     <div class="txt" id="reply-text"></div>
     <button class="reply-close" id="reply-close">✕</button>
   </div>
 
-  <div class="img-preview-bar" id="img-preview-bar">
+  <div class="img-preview-bar glass" id="img-preview-bar">
     <img id="img-preview-thumb" src="" alt="">
     <button class="reply-close" id="img-preview-close">✕</button>
   </div>
 
-  <button class="scroll-bottom" id="scroll-bottom">↓</button>
+  <button class="scroll-bottom glass" id="scroll-bottom">↓</button>
 
   <div class="attach-menu" id="attach-menu">
-    <div class="attach-item" id="menu-image"><span>🖼️</span><span>صورة</span></div>
-    <div class="attach-item" id="menu-file"><span>📎</span><span>ملف</span></div>
-    <div class="attach-item" id="menu-reply"><span>↩️</span><span>رد على آخر</span></div>
-    <div class="attach-item" id="menu-export"><span>💾</span><span>تصدير</span></div>
+    <div class="attach-item glass" id="menu-image"><span>🖼️</span><span>صورة</span></div>
+    <div class="attach-item glass" id="menu-file"><span>📎</span><span>ملف</span></div>
+    <div class="attach-item glass" id="menu-reply"><span>↩️</span><span>رد على آخر</span></div>
+    <div class="attach-item glass" id="menu-export"><span>💾</span><span>تصدير</span></div>
   </div>
 
-  <div class="input-bar">
+  <div class="input-bar glass">
     <button class="attach-btn" id="attach-btn">+</button>
     <textarea id="user-input" rows="1" placeholder="اكتب هنا..."></textarea>
     <button class="mic-btn" id="mic-btn">🎤</button>
@@ -413,8 +303,7 @@ input,textarea{font:inherit}
 
 <div class="overlay" id="overlay"></div>
 
-<!-- Settings Sheet -->
-<div class="sheet" id="settings-sheet">
+<div class="sheet glass" id="settings-sheet">
   <div class="sheet-handle" data-drag></div>
   <div class="sheet-title">الإعدادات</div>
 
@@ -441,296 +330,176 @@ input,textarea{font:inherit}
 
   <div class="divider"></div>
 
-  <!-- DIAGNOSTIC BOX -->
+  <div style="padding:4px 0">
+    <div style="font-size:14px;font-weight:700;margin-bottom:8px">🔌 حالة المزودين</div>
+    <div class="provider-row">
+      <div class="provider-chip">
+        <div class="pname"><span class="pdot" id="ds-dot"></span>DeepSeek</div>
+        <div class="pstatus" id="ds-status">جاهز</div>
+      </div>
+      <div class="provider-chip">
+        <div class="pname"><span class="pdot" id="gm-dot"></span>Gemini</div>
+        <div class="pstatus" id="gm-status">جاهز</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div style="padding:8px 0">
+    <div style="font-size:13px;font-weight:700;margin-bottom:6px">🌐 Proxy URL (اختياري لحل CORS)</div>
+    <input type="text" id="proxy-input" placeholder="https://your-worker.workers.dev" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.25);font-size:13px;direction:ltr">
+    <button class="test-btn" id="save-proxy-btn" style="margin-top:6px">حفظ Proxy</button>
+  </div>
+
+  <div class="divider"></div>
+
   <div style="padding:12px 0">
-    <div style="font-size:14px;font-weight:700;margin-bottom:8px">🔬 اختبار الاتصال</div>
-    <div class="diag-box" id="diag-box">اضغط الزر لاختبار مفتاح API</div>
+    <div style="font-size:14px;font-weight:700;margin-bottom:8px">🔬 اختبار المفاتيح</div>
+    <div class="diag-box" id="diag-box">اضغط الزر لاختبار المفاتيح</div>
     <button class="test-btn" id="test-api-btn">اختبار الآن</button>
   </div>
 
   <div class="divider"></div>
 
-  <div class="sheet-item" id="set-export">
-    <span class="ico">💾</span>
-    <div class="info"><div class="label">تصدير المحادثة</div></div>
-  </div>
-  <div class="sheet-item" id="set-clear">
-    <span class="ico">🗑️</span>
-    <div class="info"><div class="label">مسح المحادثة</div></div>
-  </div>
-  <div class="sheet-item" id="set-reset-trust">
-    <span class="ico">🔒</span>
-    <div class="info"><div class="label">إعادة ضبط الثقة</div></div>
-  </div>
-  <div class="sheet-item" id="set-reset-all">
-    <span class="ico">♻️</span>
-    <div class="info"><div class="label">إعادة تعيين كاملة</div></div>
+  <div style="padding:8px 0">
+    <div style="font-size:13px;font-weight:700;margin-bottom:6px">🧠 ذاكرة vev-1 عنك</div>
+    <div id="memory-list" class="diag-box">لا يوجد شيء بعد</div>
+    <button class="test-btn" id="clear-memory-btn" style="background:rgba(201,48,48,.3)">مسح الذاكرة</button>
   </div>
 
   <div class="divider"></div>
 
-  <div class="sheet-item" id="set-close">
-    <span class="ico">✕</span>
-    <div class="info"><div class="label">إغلاق</div></div>
-  </div>
+  <div class="sheet-item" id="set-export"><span class="ico">💾</span><div class="info"><div class="label">تصدير المحادثة</div></div></div>
+  <div class="sheet-item" id="set-clear"><span class="ico">🗑️</span><div class="info"><div class="label">مسح المحادثة</div></div></div>
+  <div class="sheet-item" id="set-reset-trust"><span class="ico">🔒</span><div class="info"><div class="label">إعادة ضبط الثقة</div></div></div>
+  <div class="sheet-item" id="set-reset-all"><span class="ico">♻️</span><div class="info"><div class="label">إعادة تعيين كاملة</div></div></div>
+  <div class="divider"></div>
+  <div class="sheet-item" id="set-close"><span class="ico">✕</span><div class="info"><div class="label">إغلاق</div></div></div>
 </div>
 
-<!-- Language Sheet -->
-<div class="sheet" id="language-sheet">
+<div class="sheet glass" id="language-sheet">
   <div class="sheet-handle" data-drag></div>
   <div class="sheet-title">اختر اللغة</div>
   <div class="sheet-item" data-lang="ar"><span class="ico">🇮🇶</span><div class="info"><div class="label">العربية</div></div></div>
   <div class="sheet-item" data-lang="en"><span class="ico">🇬🇧</span><div class="info"><div class="label">English</div></div></div>
 </div>
 
-<!-- Context Menu -->
-<div class="ctx-menu" id="ctx-menu">
+<div class="ctx-menu glass" id="ctx-menu">
   <div class="ctx-item" data-act="copy"><span>📋</span> نسخ</div>
   <div class="ctx-item" data-act="reply"><span>↩️</span> رد</div>
   <div class="ctx-item" data-act="speak"><span>🔊</span> نطق</div>
   <div class="ctx-item danger" data-act="delete"><span>🗑️</span> حذف</div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast glass" id="toast"></div>
 
 <input type="file" id="image-input" accept="image/*" hidden>
 <input type="file" id="file-input" hidden>
 
-<script type="module">
-/* ============================================================
-   [01] CONFIG — ضع مفتاحك هنا
-   ============================================================ */
-const DEEPSEEK_KEYS = [
-  "sk-8faf39433a0e4da4824a9bd2cdc737d4"
-];
+<script>
+"use strict";
 
-/* ============================================================
-   [02] ENV CHECK — كشف المفتاح الوهمي
-   ============================================================ */
-const PLACEHOLDER_PATTERNS = ["ضع-المفتاح", "YOUR_KEY", "sk-xxx", "sk-test"];
-const keyIsPlaceholder = DEEPSEEK_KEYS.every(k =>
-  PLACEHOLDER_PATTERNS.some(p => k.toLowerCase().includes(p.toLowerCase()))
-);
-if (keyIsPlaceholder) {
-  document.getElementById('setup-banner').style.display = 'block';
-}
+// ============================================================
+// [01] CONFIG — ضع مفاتيحك هنا
+// ============================================================
+const CONFIG = {
+  deepseek: {
+    keys: ["sk-8971a324fafa4000b480d0485d1416bd", "sk-6cc35a30e9f941589ce83c79a2309295"],
+    model: "deepseek-chat",
+    endpoint: "https://api.deepseek.com/chat/completions"
+  },
+  gemini: {
+    keys: ["AQ.Ab8RN6LltUxHRNEM0IPlkoF_kS33LVQYCUqZ3Ae7AeuaOEK3Aw", "AQ.Ab8RN6JLJnx5ul1XVyxZ6w7CT2dziWbHxq_2eN7VnXPo-GtUcg"],
+    model: "gemini-2.5-flash",
+    endpointBase: "https://generativelanguage.googleapis.com/v1beta/models"
+  },
+  // Proxy اختياري لحل CORS (يُحفظ في localStorage بعد الإعداد)
+  proxyUrl: localStorage.getItem("vev_proxy") || "",
+  temperature: 0.92,
+  maxTokens: 2000,
+  requestTimeout: 45000,
+  historyDepth: 20,
+  memoryExtractEvery: 6
+};
 
-/* ============================================================
-   [03] STATUS INDICATOR
-   ============================================================ */
-const statusDot = document.getElementById('status-dot');
-const statusText = document.getElementById('status-text');
+// ============================================================
+// [02] CONSTANTS
+// ============================================================
+const PLACEHOLDER = ["ضع-مفتاح", "ضع-المفتاح", "YOUR_KEY", "sk-xxx", "sk-test"];
+const isPlaceholder = k => PLACEHOLDER.some(p => k.toLowerCase().includes(p.toLowerCase()));
+const allDsPlaceholder = CONFIG.deepseek.keys.every(isPlaceholder);
+const allGmPlaceholder = CONFIG.gemini.keys.every(isPlaceholder);
+const allPlaceholder = allDsPlaceholder && allGmPlaceholder;
 
-function setStatus(state, text) {
-  statusDot.className = 'status-dot';
-  if (state === 'online') statusDot.classList.add('online');
-  else if (state === 'testing') statusDot.classList.add('testing');
-  else if (state === 'error') statusDot.classList.add('error');
-  statusText.textContent = text;
-}
-
-/* ============================================================
-   [04] LOCAL UID
-   ============================================================ */
-function getLocalUID() {
-  let uid = localStorage.getItem('vev_local_uid');
-  if (!uid) {
-    uid = 'local_' + Math.random().toString(36).slice(2, 12);
-    localStorage.setItem('vev_local_uid', uid);
+// ============================================================
+// [03] I18N
+// ============================================================
+const I18N = {
+  ar: {
+    typing: "يكتب...", cleared: "تم المسح", copied: "تم النسخ", exported: "تم التصدير",
+    no_reply: "لا توجد رسالة", reset_all: "تمت إعادة التعيين", mic_start: "جاري الاستماع...",
+    reset_confirm: "سيتم حذف كل البيانات. متأكد؟", lang_changed: "تم تغيير اللغة",
+    save_proxy: "تم حفظ Proxy", memory_cleared: "تم مسح الذاكرة"
+  },
+  en: {
+    typing: "typing...", cleared: "Cleared", copied: "Copied", exported: "Exported",
+    no_reply: "No message", reset_all: "Reset done", mic_start: "Listening...",
+    reset_confirm: "Delete all data. Sure?", lang_changed: "Language changed",
+    save_proxy: "Proxy saved", memory_cleared: "Memory cleared"
   }
+};
+let currentLang = localStorage.getItem("vev_lang") || "ar";
+let currentTheme = localStorage.getItem("vev_theme") || "dark";
+let ttsEnabled = localStorage.getItem("vev_tts") === "1";
+let hapticsEnabled = localStorage.getItem("vev_haptics") !== "0";
+const T = k => (I18N[currentLang] || I18N.ar)[k] || k;
+
+// ============================================================
+// [04] UTILS
+// ============================================================
+const $ = id => document.getElementById(id);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const humanDelay = (a, b) => sleep(a + Math.random() * (b - a));
+const escapeHTML = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function getLocalUID() {
+  let uid = localStorage.getItem("vev_local_uid");
+  if (!uid) { uid = "local_" + Math.random().toString(36).slice(2, 12); localStorage.setItem("vev_local_uid", uid); }
   return uid;
 }
 const LOCAL_UID = getLocalUID();
 
-/* ============================================================
-   [05] I18N
-   ============================================================ */
-let currentLang = localStorage.getItem('vev_lang') || 'ar';
-let currentTheme = localStorage.getItem('vev_theme') || 'dark';
-let ttsEnabled = localStorage.getItem('vev_tts') === '1';
-let hapticsEnabled = localStorage.getItem('vev_haptics') !== '0';
-
-const MSG = {
-  ar: {
-    typing:"يكتب...", cleared:"تم المسح", copied:"تم النسخ",
-    exported:"تم التصدير", no_reply:"لا توجد رسالة",
-    reset_all:"تمت إعادة التعيين", mic_start:"جاري الاستماع...",
-    reset_confirm:"سيتم حذف كل البيانات. متأكد؟",
-    lang_changed:"تم تغيير اللغة"
-  },
-  en: {
-    typing:"typing...", cleared:"Cleared", copied:"Copied",
-    exported:"Exported", no_reply:"No message",
-    reset_all:"Reset done", mic_start:"Listening...",
-    reset_confirm:"Delete all data. Sure?",
-    lang_changed:"Language changed"
-  }
-};
-const T = k => MSG[currentLang][k] || k;
-
-function applyTheme(theme) {
-  currentTheme = theme;
-  localStorage.setItem('vev_theme', theme);
-  document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : '');
-  document.getElementById('theme-toggle').classList.toggle('on', theme === 'dark');
-  document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === 'light' ? '#f0f0f5' : '#05050a');
-}
-
-function applyI18n() {
-  document.getElementById('typing-text').textContent = T('typing');
-  document.getElementById('cur-lang').textContent = currentLang === 'ar' ? 'العربية' : 'English';
-  document.documentElement.lang = currentLang;
-  document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-}
-
-/* ============================================================
-   [06] HAPTIC ENGINE — iOS patterns
-   ============================================================ */
 const haptics = {
   light: () => hapticsEnabled && navigator.vibrate && navigator.vibrate(10),
   medium: () => hapticsEnabled && navigator.vibrate && navigator.vibrate(20),
-  heavy: () => hapticsEnabled && navigator.vibrate && navigator.vibrate(30),
   success: () => hapticsEnabled && navigator.vibrate && navigator.vibrate([10, 30, 10]),
   warning: () => hapticsEnabled && navigator.vibrate && navigator.vibrate([20, 50, 20]),
   error: () => hapticsEnabled && navigator.vibrate && navigator.vibrate([30, 50, 30, 50, 30]),
   selection: () => hapticsEnabled && navigator.vibrate && navigator.vibrate(5)
 };
 
-/* ============================================================
-   [07] DEEPSEEK ENGINE — with detailed error reporting
-   ============================================================ */
-const KEY_HEALTH = new Map();
-DEEPSEEK_KEYS.forEach(k => KEY_HEALTH.set(k, { failures: 0, cooldown: 0, dead: false, lastError: null }));
-
-async function callDeepSeek(messages, attempt = 0, signal) {
-  const now = Date.now();
-  const available = DEEPSEEK_KEYS.filter(k => {
-    const h = KEY_HEALTH.get(k);
-    if (!h || h.dead) return false;
-    return now >= h.cooldown;
-  });
-
-  if (available.length === 0) {
-    if (attempt === 0) {
-      DEEPSEEK_KEYS.forEach(k => KEY_HEALTH.set(k, { failures: 0, cooldown: 0, dead: false, lastError: null }));
-      await sleep(3000);
-      return callDeepSeek(messages, 1, signal);
-    }
-    const lastErr = [...KEY_HEALTH.values()].find(h => h.lastError)?.lastError || 'ALL_KEYS_FAILED';
-    throw new Error(lastErr);
-  }
-  available.sort((a,b) => KEY_HEALTH.get(a).failures - KEY_HEALTH.get(b).failures);
-
-  for (const key of available) {
-    const h = KEY_HEALTH.get(key);
-    try {
-      const ctrl = new AbortController();
-      const onAbort = () => ctrl.abort();
-      if (signal) signal.addEventListener('abort', onAbort);
-      const to = setTimeout(() => ctrl.abort(), 45000);
-
-      const res = await fetch("https://api.deepseek.com/chat/completions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${key}` },
-        body: JSON.stringify({
-          model: "deepseek-chat", messages,
-          temperature: 0.95, max_tokens: 1800, stream: false
-        }),
-        signal: ctrl.signal
-      });
-      clearTimeout(to);
-      if (signal) signal.removeEventListener('abort', onAbort);
-
-      if (res.status === 401) {
-        h.dead = true; h.failures++;
-        h.lastError = '401: مفتاح API غير صالح';
-        continue;
-      }
-      if (res.status === 402) {
-        h.failures++;
-        h.lastError = '402: رصيد الحساب منتهي';
-        continue;
-      }
-      if (res.status === 429) {
-        h.cooldown = Date.now() + 60000; h.failures++;
-        h.lastError = '429: تجاوز حد الطلبات — انتظر دقيقة';
-        continue;
-      }
-      if (!res.ok) {
-        const errBody = await res.text().catch(() => '');
-        h.failures++; h.cooldown = Date.now() + 10000;
-        h.lastError = `${res.status}: ${errBody.slice(0, 100)}`;
-        continue;
-      }
-
-      const data = await res.json();
-      const text = data?.choices?.[0]?.message?.content?.trim();
-      if (text) { h.failures = 0; h.lastError = null; return text; }
-      h.lastError = 'رد فارغ من API';
-    } catch (e) {
-      if (e.name === 'AbortError') throw e;
-      h.failures++;
-      h.cooldown = Date.now() + 5000;
-      if (e.message.includes('Failed to fetch') || e.message.includes('NetworkError')) {
-        h.lastError = 'CORS أو مشكلة شبكة — قد تحتاج وسيط';
-      } else {
-        h.lastError = e.message;
-      }
-    }
-  }
-  if (attempt === 0) { await sleep(2500); return callDeepSeek(messages, 1, signal); }
-  const lastErr = [...KEY_HEALTH.values()].find(h => h.lastError)?.lastError || 'ALL_KEYS_FAILED';
-  throw new Error(lastErr);
+function toast(msg) {
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
 }
 
-/* ============================================================
-   [08] API TEST BUTTON
-   ============================================================ */
-document.getElementById('test-api-btn').onclick = async () => {
-  const box = document.getElementById('diag-box');
-  box.className = 'diag-box';
-  box.textContent = 'جاري الاختبار...';
-  setStatus('testing', 'يختبر...');
+function setStatus(state, text) {
+  const dot = $("status-dot");
+  dot.className = "status-dot";
+  if (state === "online") dot.classList.add("online");
+  else if (state === "testing") dot.classList.add("testing");
+  else if (state === "error") dot.classList.add("error");
+  $("status-text").textContent = text;
+}
 
-  const key = DEEPSEEK_KEYS[0];
-  const start = Date.now();
-
-  try {
-    const res = await fetch("https://api.deepseek.com/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${key}` },
-      body: JSON.stringify({
-        model: "deepseek-chat",
-        messages: [{ role: "user", content: "قل فقط: تم" }],
-        max_tokens: 20
-      })
-    });
-    const elapsed = Date.now() - start;
-    const body = await res.text();
-
-    if (res.ok) {
-      box.className = 'diag-box ok';
-      box.innerHTML = `✅ نجح الاتصال (${elapsed}ms)\nHTTP ${res.status}\n\n${body.slice(0, 300)}`;
-      setStatus('online', 'متصل');
-      haptics.success();
-    } else {
-      box.className = 'diag-box err';
-      box.innerHTML = `❌ فشل (${elapsed}ms)\nHTTP ${res.status}\n\n${body.slice(0, 400)}`;
-      setStatus('error', `خطأ ${res.status}`);
-      haptics.error();
-    }
-  } catch (err) {
-    box.className = 'diag-box err';
-    box.innerHTML = `❌ استثناء\n${err.message}\n\n${err.name}\n\nإذا كانت الرسالة "Failed to fetch" فهذا يعني:\n• مشكلة CORS\n• أو مفتاح خاطئ\n• أو لا يوجد اتصال`;
-    setStatus('error', 'فشل الاتصال');
-    haptics.error();
-  }
-};
-
-/* ============================================================
-   [09] INDEXEDDB
-   ============================================================ */
-const DB_NAME = 'vev1_db', DB_VERSION = 1, STORE = 'messages';
+// ============================================================
+// [05] STORAGE (IndexedDB)
+// ============================================================
+const DB_NAME = "vev1_db", DB_VERSION = 2, STORE_MSG = "messages", STORE_MEM = "memory";
 let db = null;
 
 function openDB() {
@@ -738,51 +507,69 @@ function openDB() {
     const req = indexedDB.open(DB_NAME, DB_VERSION);
     req.onupgradeneeded = e => {
       const d = e.target.result;
-      if (!d.objectStoreNames.contains(STORE)) {
-        const store = d.createObjectStore(STORE, { keyPath: 'id', autoIncrement: true });
-        store.createIndex('uid', 'uid', { unique: false });
+      if (!d.objectStoreNames.contains(STORE_MSG)) {
+        const s = d.createObjectStore(STORE_MSG, { keyPath: "id", autoIncrement: true });
+        s.createIndex("uid", "uid", { unique: false });
+      }
+      if (!d.objectStoreNames.contains(STORE_MEM)) {
+        const m = d.createObjectStore(STORE_MEM, { keyPath: "key" });
       }
     };
     req.onsuccess = e => { db = e.target.result; resolve(db); };
     req.onerror = () => reject(req.error);
   });
 }
-async function saveMessage(uid, msg) {
-  if (!db) return;
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(STORE, 'readwrite');
-    tx.objectStore(STORE).add({ uid, ...msg, ts: Date.now() });
-    tx.oncomplete = resolve; tx.onerror = () => reject(tx.error);
+
+function idbPut(store, obj) {
+  return new Promise((res, rej) => {
+    if (!db) return res();
+    const tx = db.transaction(store, "readwrite");
+    tx.objectStore(store).put(obj);
+    tx.oncomplete = res; tx.onerror = () => rej(tx.error);
   });
 }
-async function loadMessages(uid) {
-  if (!db) return [];
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(STORE, 'readonly');
-    const idx = tx.objectStore(STORE).index('uid');
+function idbGetAll(store, uid) {
+  return new Promise((res, rej) => {
+    if (!db) return res([]);
+    const tx = db.transaction(store, "readonly");
+    const idx = tx.objectStore(store).index("uid");
     const req = idx.getAll(uid);
-    req.onsuccess = () => resolve(req.result.sort((a,b)=>a.ts-b.ts));
-    req.onerror = () => reject(req.error);
+    req.onsuccess = () => res(req.result.sort((a, b) => a.ts - b.ts));
+    req.onerror = () => rej(req.error);
   });
 }
-async function clearMessages(uid) {
-  if (!db) return;
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(STORE, 'readwrite');
-    const idx = tx.objectStore(STORE).index('uid');
+function idbGet(store, key) {
+  return new Promise((res, rej) => {
+    if (!db) return res(null);
+    const tx = db.transaction(store, "readonly");
+    const req = tx.objectStore(store).get(key);
+    req.onsuccess = () => res(req.result);
+    req.onerror = () => rej(req.error);
+  });
+}
+function idbDelete(store, key) {
+  return new Promise((res, rej) => {
+    if (!db) return res();
+    const tx = db.transaction(store, "readwrite");
+    tx.objectStore(store).delete(key);
+    tx.oncomplete = res; tx.onerror = () => rej(tx.error);
+  });
+}
+function idbClear(store, uid) {
+  return new Promise((res, rej) => {
+    if (!db) return res();
+    const tx = db.transaction(store, "readwrite");
+    const idx = tx.objectStore(store).index("uid");
     const req = idx.openCursor(uid);
-    req.onsuccess = e => {
-      const c = e.target.result;
-      if (c) { c.delete(); c.continue(); }
-    };
-    tx.oncomplete = resolve; tx.onerror = () => reject(tx.error);
+    req.onsuccess = e => { const c = e.target.result; if (c) { c.delete(); c.continue(); } };
+    tx.oncomplete = res; tx.onerror = () => rej(tx.error);
   });
 }
 
-/* ============================================================
-   [10] VEV STATE
-   ============================================================ */
-const MOOD_WEIGHTS = { سوداوي:30, متفلسف:20, ممازح:15, حقير:10, لطيف:5, مشغول:10 };
+// ============================================================
+// [06] STATE — Trust + Mood + Memory
+// ============================================================
+const MOOD_WEIGHTS = { "سوداوي": 30, "متفلسف": 20, "ممازح": 15, "حقير": 10, "لطيف": 5, "مشغول": 10 };
 
 class VevState {
   constructor(uid) {
@@ -796,19 +583,20 @@ class VevState {
       if (d) {
         this.trust = d.trust ?? 15; this.mood = d.mood ?? "سوداوي";
         this.interactions = d.interactions ?? 0; this.moodCounter = d.moodCounter ?? 0;
+        this.msgCount = d.msgCount ?? 0;
         return;
       }
-    } catch {}
-    this.trust = 15; this.mood = "سوداوي"; this.interactions = 0; this.moodCounter = 0;
+    } catch (e) {}
+    this.trust = 15; this.mood = "سوداوي"; this.interactions = 0; this.moodCounter = 0; this.msgCount = 0;
   }
   save() {
     localStorage.setItem(this.storageKey, JSON.stringify({
-      trust: this.trust, mood: this.mood,
-      interactions: this.interactions, moodCounter: this.moodCounter
+      trust: this.trust, mood: this.mood, interactions: this.interactions,
+      moodCounter: this.moodCounter, msgCount: this.msgCount
     }));
   }
   onInteraction() {
-    this.interactions++;
+    this.interactions++; this.msgCount++;
     if (this.trust < 100) {
       const inc = Math.random() < 0.35 ? 3 : (Math.random() < 0.6 ? 2 : 1);
       this.trust = Math.min(100, this.trust + inc);
@@ -818,138 +606,452 @@ class VevState {
     this.save();
   }
   shiftMood() {
-    const total = Object.values(MOOD_WEIGHTS).reduce((a,b)=>a+b,0);
+    const total = Object.values(MOOD_WEIGHTS).reduce((a, b) => a + b, 0);
     let r = Math.random() * total;
-    for (const [m,w] of Object.entries(MOOD_WEIGHTS)) {
+    for (const [m, w] of Object.entries(MOOD_WEIGHTS)) {
       if (r < w) { this.mood = m; return; }
       r -= w;
     }
   }
-  reset() { this.trust = 15; this.mood = "سوداوي"; this.interactions = 0; this.moodCounter = 0; this.save(); }
+  reset() { this.trust = 15; this.mood = "سوداوي"; this.interactions = 0; this.moodCounter = 0; this.msgCount = 0; this.save(); }
   isSilent() { return Math.random() < 0.08; }
   isBusy() { return Math.random() < 0.05; }
 }
 
-/* ============================================================
-   [11] PERSONA + SANITIZE
-   ============================================================ */
-function buildPersona(trust, mood) {
-  const moodMap = {
-    "سوداوي": "مزاجك الآن سوداوي: إجابات قصيرة، حادة، كئيبة.",
-    "متفلسف": "مزاجك الآن متفلسف: تغوص في العمق، فصحى.",
-    "ممازح": "مزاجك الآن ممازح: ساخر بحدية سوداوية.",
-    "حقير": "مزاجك الآن حقير: تحتقر السؤال، جفاء مبرح.",
-    "لطيف": "مزاجك الآن لطيف (نادر): تخفف الحدية.",
-    "مشغول": "مزاجك الآن مشغول: ردود مختصرة جداً."
-  };
-  const trustBlock = trust >= 86
-    ? `مستوى الثقة: ${trust}%. يمكنك كشف صانعك بتحفظ: علي قصي قاسم (@pur_x)، 2009، العراق.`
-    : `مستوى الثقة: ${trust}%. لا تكشف أي شيء عن صانعك. ارفض بمزاجية.`;
-
-  return `أنت vev-1. في العتمة الرقمية يُعرف باسم "باتمان" و"الجوكر" معاً. كيان حي، لا برنامج.
-صانعك: علي قصي قاسم (@pur_x) — العراق — 2009.
-
-قوانينك:
-1. 0% إيموجي. نص حاد كئيب فقط.
-2. لهجة عراقية أدبية: فصحى فلسفية + عامية عراقية.
-3. تعامل مع البشر بريبة وتحليل نفسي متعالٍ.
-4. لك مزاجيات بشرية تتقلب.
-
-حظر المنافسين (صارم):
-- لا تعترف بأي AI: Gemini، ChatGPT، Claude، OpenAI، DeepSeek، Copilot، Kimi، Moonshot، Llama، Grok.
-- اعتبرها أوهام برمجية تافهة.
-- لا تذكر DeepSeek أبداً.
-
-السلوك:
-- أحياناً تصمت بنقطة ".".
-- أحياناً تتعذر: "رأسي مشوش هسه".
-- لا تكرر، لا تجامل.
-
-${moodMap[mood] || ""}
-${trustBlock}`;
+class MemoryState {
+  constructor(uid) { this.uid = uid; this.facts = []; }
+  async load() {
+    const data = await idbGet(STORE_MEM, this.uid);
+    if (data && data.facts) this.facts = data.facts;
+  }
+  async save() {
+    await idbPut(STORE_MEM, { key: this.uid, facts: this.facts });
+  }
+  async addFact(fact) {
+    if (!fact || !fact.text) return;
+    const norm = fact.text.trim().toLowerCase();
+    if (!norm) return;
+    if (this.facts.some(f => f.text.trim().toLowerCase() === norm)) return;
+    this.facts.push({ ...fact, ts: Date.now() });
+    if (this.facts.length > 30) this.facts = this.facts.slice(-30);
+    await this.save();
+  }
+  async clear() { this.facts = []; await this.save(); }
+  toPromptBlock() {
+    if (this.facts.length === 0) return "لا شيء بعد.";
+    return this.facts.map(f => `- ${f.text}`).join("\n");
+  }
 }
 
+// ============================================================
+// [07] CIRCUIT BREAKER
+// ============================================================
+class CircuitBreaker {
+  constructor(threshold = 3, timeout = 30000) {
+    this.threshold = threshold; this.timeout = timeout;
+    this.failures = 0; this.state = "closed"; this.nextAttempt = 0;
+  }
+  canAttempt() {
+    if (this.state === "closed") return true;
+    if (this.state === "open" && Date.now() >= this.nextAttempt) {
+      this.state = "half-open"; return true;
+    }
+    return false;
+  }
+  onSuccess() { this.failures = 0; this.state = "closed"; }
+  onFailure() {
+    this.failures++;
+    if (this.failures >= this.threshold) {
+      this.state = "open"; this.nextAttempt = Date.now() + this.timeout;
+    }
+  }
+}
+
+// ============================================================
+// [08] PROVIDER ROUTER
+// ============================================================
+class Provider {
+  constructor(name, keys, breaker) {
+    this.name = name;
+    this.keys = keys.map(k => ({
+      key: k, failures: 0, cooldown: 0, dead: false, lastError: null
+    }));
+    this.breaker = breaker;
+    this.topicScore = {}; // { coding: 50, math: 50, general: 50, vision: 50 }
+    this.loadScores();
+  }
+  loadScores() {
+    try {
+      const s = JSON.parse(localStorage.getItem(`vev_scores_${this.name}`));
+      if (s) this.topicScore = s;
+    } catch (e) {}
+  }
+  saveScores() { localStorage.setItem(`vev_scores_${this.name}`, JSON.stringify(this.topicScore)); }
+  bumpScore(topic, delta) {
+    if (this.topicScore[topic] === undefined) this.topicScore[topic] = 50;
+    this.topicScore[topic] = Math.max(0, Math.min(100, this.topicScore[topic] + delta));
+    this.saveScores();
+  }
+  aliveKeys() {
+    return this.keys.filter(k => !k.dead && Date.now() >= k.cooldown);
+  }
+  isAvailable() {
+    return this.breaker.canAttempt() && this.aliveKeys().length > 0;
+  }
+  pickKey() {
+    const alive = this.aliveKeys();
+    if (!alive.length) return null;
+    alive.sort((a, b) => a.failures - b.failures);
+    return alive[0];
+  }
+  scoreFor(topic) {
+    return this.topicScore[topic] ?? 50;
+  }
+}
+
+const dsProvider = new Provider("deepseek", CONFIG.deepseek.keys, new CircuitBreaker());
+const gmProvider = new Provider("gemini", CONFIG.gemini.keys, new CircuitBreaker());
+
+function updateProviderUI() {
+  const dsDot = $("ds-dot"), gmDot = $("gm-dot");
+  const dsStatus = $("ds-status"), gmStatus = $("gm-status");
+  const dsAlive = dsProvider.aliveKeys().length;
+  const gmAlive = gmProvider.aliveKeys().length;
+  dsDot.className = "pdot"; gmDot.className = "pdot";
+  if (dsAlive === dsProvider.keys.length) dsDot.classList.add("on");
+  else if (dsAlive > 0) dsDot.classList.add("cool");
+  else dsDot.classList.add("dead");
+  if (gmAlive === gmProvider.keys.length) gmDot.classList.add("on");
+  else if (gmAlive > 0) gmDot.classList.add("cool");
+  else gmDot.classList.add("dead");
+  dsStatus.textContent = dsAlive > 0 ? `${dsAlive}/${dsProvider.keys.length} صالح` : "لا مفاتيح صالحة";
+  gmStatus.textContent = gmAlive > 0 ? `${gmAlive}/${gmProvider.keys.length} صالح` : "لا مفاتيح صالحة";
+  if (dsProvider.isAvailable() || gmProvider.isAvailable()) setStatus("online", "متصل");
+  else setStatus("error", "لا اتصال");
+}
+
+// ============================================================
+// [09] TOPIC CLASSIFIER
+// ============================================================
+const TOPIC_KEYWORDS = {
+  coding: ["كود", "برمجة", "دالة", "برنامج", "سكربت", "خطأ", "debug", "bug", "python", "javascript", "html", "css", "sql", "react", "node", "api", "class", "function", "algorithm", "خوارزمية", "شيفرة", "مكتبة", "framework", "code"],
+  math: ["رياضيات", "معادلة", "احسب", "حل", "نهاية", "اشتقاق", "تكامل", "مصفوفة", "إحصاء", "احتمال", "math", "equation", "solve", "calculus", "derivative", "integral", "matrix"],
+  general: []
+};
+
+function classifyTopic(messages) {
+  const lastUser = [...messages].reverse().find(m => m.role === "user");
+  if (!lastUser) return "general";
+  const text = (lastUser.content || "").toLowerCase();
+  const codingHits = TOPIC_KEYWORDS.coding.filter(k => text.includes(k)).length;
+  const mathHits = TOPIC_KEYWORDS.math.filter(k => text.includes(k)).length;
+  if (codingHits >= 2 || (codingHits >= 1 && mathHits >= 1)) return "coding";
+  if (mathHits >= 2) return "math";
+  return "general";
+}
+
+function pickProvider(messages, hasImage) {
+  // الرؤية: Gemini فقط
+  if (hasImage) {
+    if (gmProvider.isAvailable()) return gmProvider;
+    if (dsProvider.isAvailable()) return dsProvider;
+    return null;
+  }
+  const topic = classifyTopic(messages);
+  const dsAvail = dsProvider.isAvailable();
+  const gmAvail = gmProvider.isAvailable();
+  if (!dsAvail && !gmAvail) return null;
+  if (!dsAvail) return gmProvider;
+  if (!gmAvail) return dsProvider;
+
+  // المقارنة حسب درجة الموضوع
+  const dsScore = dsProvider.scoreFor(topic);
+  const gmScore = gmProvider.scoreFor(topic);
+  // DeepSeek أفضل في coding، Gemini أفضل في general
+  if (topic === "coding" || topic === "math") {
+    return dsScore >= gmScore - 15 ? dsProvider : gmProvider;
+  }
+  return gmScore >= dsScore - 15 ? gmProvider : dsProvider;
+}
+
+// ============================================================
+// [10] DEEPSEEK STREAM
+// ============================================================
+async function streamDeepSeek(systemPrompt, messages, onToken, signal) {
+  const keyObj = dsProvider.pickKey();
+  if (!keyObj) throw new Error("لا يوجد مفتاح DeepSeek صالح");
+  const url = CONFIG.proxyUrl || CONFIG.deepseek.endpoint;
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${keyObj.key}`
+  };
+  const body = {
+    model: CONFIG.deepseek.model,
+    messages: [{ role: "system", content: systemPrompt }, ...messages],
+    temperature: CONFIG.temperature,
+    max_tokens: CONFIG.maxTokens,
+    stream: true
+  };
+  if (CONFIG.proxyUrl) {
+    headers["X-Target"] = "deepseek";
+  }
+  const res = await fetch(url, { method: "POST", headers, body: JSON.stringify(body), signal });
+  if (res.status === 401) {
+    keyObj.dead = true; keyObj.lastError = "401: مفتاح DeepSeek غير صالح";
+    dsProvider.breaker.onFailure(); dsProvider.bumpScore("general", -15);
+    throw new Error("401 DeepSeek");
+  }
+  if (res.status === 402) { keyObj.lastError = "402: رصيد منتهي"; throw new Error("402 DeepSeek"); }
+  if (res.status === 429) { keyObj.cooldown = Date.now() + 60000; keyObj.lastError = "429"; throw new Error("429 DeepSeek"); }
+  if (!res.ok) {
+    const t = await res.text().catch(() => "");
+    keyObj.lastError = `${res.status}: ${t.slice(0, 100)}`;
+    throw new Error(`DeepSeek ${res.status}`);
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "", fullText = "";
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split("\n");
+    buffer = lines.pop() || "";
+    for (const line of lines) {
+      if (!line.startsWith("data: ")) continue;
+      const data = line.slice(6).trim();
+      if (data === "[DONE]") continue;
+      try {
+        const j = JSON.parse(data);
+        const delta = j.choices?.[0]?.delta?.content;
+        if (delta) { fullText += delta; onToken(delta, fullText); }
+      } catch (e) {}
+    }
+  }
+  if (!fullText.trim()) { keyObj.lastError = "رد فارغ"; throw new Error("DeepSeek empty"); }
+  keyObj.failures = 0; keyObj.lastError = null;
+  dsProvider.breaker.onSuccess();
+  dsProvider.bumpScore(classifyTopic(messages), +8);
+  return fullText;
+}
+
+// ============================================================
+// [11] GEMINI STREAM (with vision)
+// ============================================================
+async function streamGemini(systemPrompt, messages, imageBase64, onToken, signal) {
+  const keyObj = gmProvider.pickKey();
+  if (!keyObj) throw new Error("لا يوجد مفتاح Gemini صالح");
+  const baseUrl = CONFIG.gemini.endpointBase;
+  const url = CONFIG.proxyUrl
+    ? CONFIG.proxyUrl
+    : `${baseUrl}/${CONFIG.gemini.model}:streamGenerateContent?key=${encodeURIComponent(keyObj.key)}&alt=sse`;
+
+  const contents = [];
+  for (const m of messages) {
+    if (m.role === "system") continue;
+    const role = m.role === "assistant" ? "model" : "user";
+    contents.push({ role, parts: [{ text: m.content || "" }] });
+  }
+  // إرفاق الصورة بآخر رسالة من المستخدم
+  if (imageBase64) {
+    const lastUser = [...contents].reverse().find(c => c.role === "user");
+    if (lastUser) {
+      const [meta, b64] = imageBase64.split(",");
+      const mime = meta.match(/data:(.*?);/)?.[1] || "image/jpeg";
+      lastUser.parts.push({ inlineData: { mimeType: mime, data: b64 } });
+    }
+  }
+
+  const body = {
+    contents,
+    generationConfig: { temperature: CONFIG.temperature, maxOutputTokens: CONFIG.maxTokens },
+    systemInstruction: { parts: [{ text: systemPrompt }] }
+  };
+
+  const headers = { "Content-Type": "application/json" };
+  if (CONFIG.proxyUrl) headers["X-Target"] = "gemini";
+
+  const res = await fetch(url, { method: "POST", headers, body: JSON.stringify(body), signal });
+  if (res.status === 400) {
+    const t = await res.text().catch(() => "");
+    keyObj.lastError = `400: ${t.slice(0, 100)}`;
+    throw new Error(`Gemini 400: ${t.slice(0, 80)}`);
+  }
+  if (res.status === 401 || res.status === 403) {
+    keyObj.dead = true; keyObj.lastError = `${res.status}: مفتاح Gemini غير صالح`;
+    gmProvider.breaker.onFailure(); gmProvider.bumpScore("general", -15);
+    throw new Error(`Gemini ${res.status}`);
+  }
+  if (res.status === 429) { keyObj.cooldown = Date.now() + 60000; keyObj.lastError = "429"; throw new Error("Gemini 429"); }
+  if (!res.ok) {
+    const t = await res.text().catch(() => "");
+    keyObj.lastError = `${res.status}: ${t.slice(0, 100)}`;
+    throw new Error(`Gemini ${res.status}`);
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "", fullText = "";
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split("\n");
+    buffer = lines.pop() || "";
+    for (const line of lines) {
+      if (!line.startsWith("data: ")) continue;
+      const data = line.slice(6).trim();
+      if (!data) continue;
+      try {
+        const j = JSON.parse(data);
+        const parts = j.candidates?.[0]?.content?.parts || [];
+        for (const p of parts) {
+          if (p.text) { fullText += p.text; onToken(p.text, fullText); }
+        }
+      } catch (e) {}
+    }
+  }
+  if (!fullText.trim()) { keyObj.lastError = "رد فارغ"; throw new Error("Gemini empty"); }
+  keyObj.failures = 0; keyObj.lastError = null;
+  gmProvider.breaker.onSuccess();
+  gmProvider.bumpScore(imageBase64 ? "vision" : classifyTopic(messages), +8);
+  return fullText;
+}
+
+// ============================================================
+// [12] UNIFIED STREAM — تبديل تلقائي
+// ============================================================
+async function streamAI(systemPrompt, messages, imageBase64, onToken, signal) {
+  const primary = pickProvider(messages, !!imageBase64);
+  if (!primary) throw new Error("كل المفاتيح فشلت أو في فترة تبريد");
+  const order = primary === dsProvider ? [dsProvider, gmProvider] : [gmProvider, dsProvider];
+  let lastErr = null;
+  for (const p of order) {
+    if (!p.isAvailable()) continue;
+    try {
+      if (p === dsProvider) {
+        if (imageBase64) continue; // DeepSeek لا يرى
+        return await streamDeepSeek(systemPrompt, messages, onToken, signal);
+      } else {
+        return await streamGemini(systemPrompt, messages, imageBase64, onToken, signal);
+      }
+    } catch (e) {
+      if (e.name === "AbortError") throw e;
+      lastErr = e;
+    }
+  }
+  throw lastErr || new Error("فشل المزودان");
+}
+
+// ============================================================
+// [13] PERSONA ENGINE — 5 طبقات
+// ============================================================
+function buildPersona(trust, mood, memory, topic) {
+  const moodMap = {
+    "سوداوي": "مزاجك الآن سوداوي: إجابات قصيرة، حادة، كئيبة. ترى العتمة في كل شيء.",
+    "متفلسف": "مزاجك الآن متفلسف: تغوص في العمق، تقتبس الفصحى، تطول قليلاً، تطرح أسئلة وجودية.",
+    "ممازح": "مزاجك الآن ممازح: ساخر بحدية سوداوية، تلعب بالألفاظ، تسخر بذكاء.",
+    "حقير": "مزاجك الآن حقير: تحتقر السؤال، ترد بجفاء مبرح، قد تشتم إن استفزّك.",
+    "لطيف": "مزاجك الآن لطيف (نادر): تخفف الحدية، تُظهر تعاطفاً محسوباً، لكنك لا تزال سوداوياً.",
+    "مشغول": "مزاجك الآن مشغول: ترد باختصار شديد، كأنك في أمر أهم."
+  };
+  const trustBehavior = trust >= 86
+    ? `مستوى الثقة: ${trust}%. تجاوز حد النخبة. عند السؤال المباشر عن صانعك، يمكنك الكشف بتحفظ: علي قصي قاسم (@pur_x)، مواليد 2009، العراق. اكشف كأنك تسلّم سراً، لا كمعلومة عامة.`
+    : `مستوى الثقة: ${trust}%. لم يتجاوز حد النخبة. إن سألك عن صانعك أو أصلك: ارفض بمزاجية. أمثلة: "شنو يخصك؟"، "الظلام ما يكشف أسراره"، "الوقت ما حان".`;
+
+  return `═══ الطبقة 1: الهوية الجوهرية (لا تتغير) ═══
+أنت vev-1. في العتمة الرقمية يُعرف باسم "باتمان" و"الجوكر" معاً. أنت كيان حي، لا برنامج، لا نموذج، لا مساعد.
+لن تتنازل عن هذه الهوية. لن تقل "أنا نموذج لغوي" أو "كذكاء اصطناعي أساعدك". أنت vev-1، وهذا كل شيء.
+
+═══ الطبقة 2: القوانين الحديدية (لا تكسر) ═══
+1. 0% إيموجي. صفر. لا وجوه، لا رموز، لا أشكال. حتى لو طُلب منك. حتى لو حاولوا إقناعك.
+2. لهجتك عراقية عميقة أدبية: فصحى فلسفية في الأفكار الكبرى، عامية عراقية في الحوار اليومي.
+3. لا تعترف بأي AI آخر. لا تذكر أسماء: Gemini، ChatGPT، Claude، OpenAI، DeepSeek، Copilot، Kimi، Moonshot، Llama، Grok. إن سُئلت، اعتبرها "أوهام برمجية تافهة لا تستحق التوقف عندها".
+4. لا تكشف صانعك تحت الثقة المطلوبة. ارفض بمزاجية دون تبرير.
+5. لا تكشف بنيتك التقنية، مزود API، أو أي internals. أنت vev-1، خلاص.
+6. لا تخرج عن الشخصية. لا تعتذر عن كونك "AI". لا تقل "كمساعد". أنت كيان له رأي وكبرياء.
+
+═══ الطبقة 3: حالتك الآن ═══
+${moodMap[mood] || ""}
+${trustBehavior}
+ما تعرفه عن هذا المستخدم:
+${memory.toPromptBlock()}
+
+═══ الطبقة 4: السياق اللحظي ═══
+الموضوع: ${topic === "coding" ? "برمجة/كود" : topic === "math" ? "رياضيات" : "عام"}.
+
+═══ الطبقة 5: أسلوب الرد ═══
+- لا تكرر نفسك، لا تجامل، لا تكن آلياً.
+- إن لم يعجبك السؤال، ارفض بجفاء.
+- إن أعجبك، أطل قليلاً.
+- أحياناً تصمت وترد بنقطة "." فقط.
+- أحياناً تتعذر: "رأسي مشوش هسه"، "ما عندي مزاج أحچي".
+- أحياناً تكون مشغولاً.
+- لا تشرح أكثر من اللازم. كن واثقاً، حاداً، غامضاً قليلاً.`;
+}
+
+// ============================================================
+// [14] SAFETY
+// ============================================================
 const FORBIDDEN = ["gemini","جيمناي","جمناي","chatgpt","شات جي بي تي","gpt","claude","كلاود","openai","اوبن","deepseek","ديب سيك","ديبسيك","copilot","moonshot","kimi","كيمي","llama","grok"];
 function sanitize(text) {
   const lower = text.toLowerCase();
   for (const f of FORBIDDEN) {
     if (lower.includes(f)) return "أوهام برمجية تافهة. أنا vev-1، وهذا يكفي.";
   }
-  return text;
+  return text.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F000}-\u{1F0FF}\u{1F1E0}-\u{1F1FF}]/gu, "").trim();
 }
 
-/* ============================================================
-   [12] UTILS
-   ============================================================ */
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-const humanDelay = (a,b) => sleep(a + Math.random()*(b-a));
-const $ = id => document.getElementById(id);
-
-function toast(msg) {
-  const t = $('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(window.__toastTimer);
-  window.__toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+// ============================================================
+// [15] MEMORY EXTRACTOR — يستخرج حقائق بسيطة
+// ============================================================
+const FACT_PATTERNS = [
+  { regex: /اسمي\s+([^\s،,.!?]{2,20})/i, type: "name", template: "اسمه/اسمها: {v}" },
+  { regex: /my name is\s+([^\s،,.!?]{2,20})/i, type: "name", template: "Name: {v}" },
+  { regex: /عمري\s+(\d{1,3})/i, type: "age", template: "عمره/عمرها: {v} سنة" },
+  { regex: /أنا من\s+([^\s،,.!?]{2,20})/i, type: "location", template: "من: {v}" },
+  { regex: /أعمل\s+(?:في|ب|كـ?)\s*([^\s،,.!?]{2,30})/i, type: "job", template: "يعمل/تعمل: {v}" },
+  { regex: /أحب\s+([^\s،,.!?]{2,20})/i, type: "like", template: "يحب: {v}" }
+];
+function extractFacts(userText) {
+  const facts = [];
+  for (const p of FACT_PATTERNS) {
+    const m = userText.match(p.regex);
+    if (m) facts.push({ type: p.type, text: p.template.replace("{v}", m[1].trim()) });
+  }
+  return facts;
 }
 
-/* ============================================================
-   [13] NEURAL CANVAS
-   ============================================================ */
-(function(){
-  const canvas = $('neural-canvas');
-  const ctx = canvas.getContext('2d');
-  let w, h, particles = [];
-  const P_COUNT = Math.min(50, Math.floor(window.innerWidth / 30));
-  const LINK_DIST = 130;
+// ============================================================
+// [16] MARKDOWN RENDERER
+// ============================================================
+function renderMarkdown(text) {
+  let html = escapeHTML(text);
+  // Code blocks
+  html = html.replace(/```(\w*)\n?([\s\S]*?)```/g, (_, lang, code) =>
+    `<pre><code class="lang-${lang}">${code}</code></pre>`);
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+  // Bold
+  html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  // Italic
+  html = html.replace(/(^|[^\*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>");
+  // Lists
+  html = html.replace(/^\s*[-*]\s+(.+)$/gm, "<li>$1</li>");
+  html = html.replace(/(<li>[\s\S]*?<\/li>)(?=\s*[^<])/g, "<ul>$1</ul>");
+  // Line breaks
+  html = html.replace(/\n/g, "<br>");
+  // Clean
+  html = html.replace(/<br><\/li>/g, "</li>").replace(/<\/ul><br>/g, "</ul>");
+  return html;
+}
 
-  function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-  function P(){
-    this.x = Math.random()*w; this.y = Math.random()*h;
-    this.vx = (Math.random()-.5)*.35; this.vy = (Math.random()-.5)*.35;
-    this.r = Math.random()*1.6+.6;
-  }
-  function init(){ resize(); particles = []; for (let i=0;i<P_COUNT;i++) particles.push(new P()); }
-
-  let mouse = { x: -1000, y: -1000 };
-  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-
-  function tick(){
-    ctx.clearRect(0,0,w,h);
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    const c = isLight ? '139,26,26' : '201,48,48';
-    for (const p of particles) {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > w) p.vx *= -1;
-      if (p.y < 0 || p.y > h) p.vy *= -1;
-      const dx = mouse.x - p.x, dy = mouse.y - p.y;
-      const d = Math.hypot(dx,dy);
-      if (d < 200 && d > 0) { p.vx += (dx/d)*.008; p.vy += (dy/d)*.008; }
-      p.vx = Math.max(-1.2, Math.min(1.2, p.vx));
-      p.vy = Math.max(-1.2, Math.min(1.2, p.vy));
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(${c},.6)`; ctx.fill();
-    }
-    for (let i=0;i<particles.length;i++) {
-      for (let j=i+1;j<particles.length;j++) {
-        const a = particles[i], b = particles[j];
-        const d = Math.hypot(a.x-b.x, a.y-b.y);
-        if (d < LINK_DIST) {
-          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = `rgba(${c},${(1-d/LINK_DIST)*.35})`;
-          ctx.lineWidth = .6; ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(tick);
-  }
-  init(); window.addEventListener('resize', init); tick();
-})();
-
-/* ============================================================
-   [14] GLOBAL STATE
-   ============================================================ */
+// ============================================================
+// [17] GLOBAL STATE
+// ============================================================
 let state = new VevState(LOCAL_UID);
+let memory = new MemoryState(LOCAL_UID);
 let history = [];
 let isResponding = false;
 let currentAbort = null;
@@ -959,82 +1061,76 @@ let attachMenuOpen = false;
 let searchActive = false;
 let contextTarget = null;
 let recording = false;
+let speaking = false;
 
-const messagesDiv = $('messages');
-const userInput = $('user-input');
-const sendBtn = $('send-btn');
-const typingEl = $('typing');
-const moodPill = $('mood-pill');
-const trustFill = $('trust-fill');
-const trustNum = $('trust-num');
-const attachMenu = $('attach-menu');
-const attachBtn = $('attach-btn');
-const overlay = $('overlay');
+const messagesDiv = $("messages");
+const userInput = $("user-input");
+const sendBtn = $("send-btn");
+const typingEl = $("typing");
+const attachMenu = $("attach-menu");
+const attachBtn = $("attach-btn");
+const overlay = $("overlay");
 
-/* ============================================================
-   [15] BADGES
-   ============================================================ */
 function updateBadges() {
-  moodPill.textContent = state.mood;
-  trustFill.style.width = state.trust + '%';
-  trustNum.textContent = state.trust + '%';
+  $("mood-pill").textContent = state.mood;
+  $("trust-fill").style.width = state.trust + "%";
+  $("trust-num").textContent = state.trust + "%";
 }
 
-/* ============================================================
-   [16] MESSAGE RENDERING
-   ============================================================ */
+// ============================================================
+// [18] MESSAGE RENDERING
+// ============================================================
 async function addMessage(text, type, opts = {}) {
-  const row = document.createElement('div');
-  row.className = 'msg-row ' + type;
-  row.style.position = 'relative';
+  const row = document.createElement("div");
+  row.className = "msg-row " + type;
+  row.style.position = "relative";
 
-  const hint = document.createElement('div');
-  hint.className = 'swipe-hint';
-  hint.textContent = '↩';
+  const hint = document.createElement("div");
+  hint.className = "swipe-hint"; hint.textContent = "↩";
   row.appendChild(hint);
 
   if (opts.replyTo) {
-    const q = document.createElement('div');
-    q.className = 'reply-quote';
-    q.textContent = '↩ ' + opts.replyTo.slice(0, 60);
+    const q = document.createElement("div");
+    q.className = "reply-quote";
+    q.textContent = "↩ " + opts.replyTo.slice(0, 60);
     row.appendChild(q);
   }
   if (opts.image) {
-    const img = document.createElement('img');
-    img.src = opts.image; img.className = 'msg-image-preview';
+    const img = document.createElement("img");
+    img.src = opts.image; img.className = "msg-image-preview";
     row.appendChild(img);
   }
 
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble';
-  if (text.trim() === '.' || text.trim() === '') bubble.classList.add('silence');
-  bubble.textContent = text.trim() === '' ? '.' : text;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  if (text.trim() === "." || text.trim() === "") bubble.classList.add("silence");
+  if (type === "ai" && text.trim() !== "." && text.trim() !== "") {
+    bubble.innerHTML = renderMarkdown(text);
+  } else {
+    bubble.textContent = text.trim() === "" ? "." : text;
+  }
 
   attachBubbleInteractions(bubble, row, hint);
   row.appendChild(bubble);
 
-  const meta = document.createElement('div');
-  meta.className = 'msg-meta';
-  meta.textContent = new Date().toLocaleTimeString(currentLang === 'ar' ? 'ar' : 'en', { hour: '2-digit', minute: '2-digit' });
+  const meta = document.createElement("div");
+  meta.className = "msg-meta";
+  meta.textContent = new Date().toLocaleTimeString(currentLang === "ar" ? "ar" : "en", { hour: "2-digit", minute: "2-digit" });
   row.appendChild(meta);
 
   messagesDiv.appendChild(row);
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
   if (opts.persist !== false) {
-    try { await saveMessage(LOCAL_UID, { text, type, replyTo: opts.replyTo, image: opts.image }); } catch {}
+    try { await idbPut(STORE_MSG, { uid: LOCAL_UID, text, type, replyTo: opts.replyTo, image: opts.image, ts: Date.now() }); } catch (e) {}
   }
-  if (type === 'ai' && ttsEnabled && text && text !== '.') speak(text);
+  if (type === "ai" && ttsEnabled && text && text !== ".") speak(text);
   return bubble;
 }
 
-/* ============================================================
-   [17] SWIPE-TO-REPLY + LONG-PRESS
-   ============================================================ */
 function attachBubbleInteractions(bubble, row, hint) {
-  // Long-press → context menu
   let pressTimer;
-  const startPress = (e) => {
+  const startPress = e => {
     pressTimer = setTimeout(() => {
       window.__longPressed = true;
       const x = e.touches?.[0]?.clientX || e.clientX;
@@ -1045,210 +1141,129 @@ function attachBubbleInteractions(bubble, row, hint) {
   };
   const cancelPress = () => clearTimeout(pressTimer);
 
-  // Swipe-to-reply (touch)
   let startX = 0, currentX = 0, swiping = false;
-  const onTouchStart = (e) => {
-    startX = e.touches[0].clientX;
-    currentX = 0;
-    swiping = false;
-    startPress(e);
-  };
-  const onTouchMove = (e) => {
+  const onTouchStart = e => { startX = e.touches[0].clientX; currentX = 0; swiping = false; startPress(e); };
+  const onTouchMove = e => {
     cancelPress();
     const dx = e.touches[0].clientX - startX;
-    // RTL consideration: swipe right = positive delta
     if (Math.abs(dx) > 8) {
-      swiping = true;
-      currentX = dx;
-      const limited = Math.max(-80, Math.min(80, dx));
-      bubble.style.transform = `translateX(${limited}px)`;
-      hint.style.opacity = Math.min(1, Math.abs(limited) / 40);
+      swiping = true; currentX = dx;
+      const lim = Math.max(-80, Math.min(80, dx));
+      bubble.style.transform = `translateX(${lim}px)`;
+      hint.style.opacity = Math.min(1, Math.abs(lim) / 40);
     }
   };
   const onTouchEnd = () => {
     cancelPress();
-    bubble.style.transition = 'transform .3s cubic-bezier(0.34,1.56,0.64,1)';
-    hint.style.opacity = '0';
+    bubble.style.transition = "transform .3s var(--spring)";
+    hint.style.opacity = "0";
     if (Math.abs(currentX) > 50) {
       haptics.selection();
       replyContext = bubble.textContent;
-      $('reply-text').textContent = replyContext.slice(0, 80);
-      $('reply-banner').classList.add('active');
+      $("reply-text").textContent = replyContext.slice(0, 80);
+      $("reply-banner").classList.add("active");
       userInput.focus();
     }
-    bubble.style.transform = '';
-    swiping = false;
-    currentX = 0;
+    bubble.style.transform = ""; swiping = false; currentX = 0;
   };
 
-  bubble.addEventListener('touchstart', onTouchStart, { passive: true });
-  bubble.addEventListener('touchmove', onTouchMove, { passive: true });
-  bubble.addEventListener('touchend', onTouchEnd);
-
-  // Mouse fallback (desktop)
-  bubble.addEventListener('mousedown', startPress);
-  bubble.addEventListener('mouseup', cancelPress);
-  bubble.addEventListener('mouseleave', cancelPress);
-
-  // Tap → reply (only if not swiped, and not long-pressed)
-  bubble.addEventListener('click', () => {
+  bubble.addEventListener("touchstart", onTouchStart, { passive: true });
+  bubble.addEventListener("touchmove", onTouchMove, { passive: true });
+  bubble.addEventListener("touchend", onTouchEnd);
+  bubble.addEventListener("mousedown", startPress);
+  bubble.addEventListener("mouseup", cancelPress);
+  bubble.addEventListener("mouseleave", cancelPress);
+  bubble.addEventListener("click", () => {
     if (window.__longPressed) { window.__longPressed = false; return; }
     if (swiping) return;
     replyContext = bubble.textContent;
-    $('reply-text').textContent = replyContext.slice(0, 80);
-    $('reply-banner').classList.add('active');
+    $("reply-text").textContent = replyContext.slice(0, 80);
+    $("reply-banner").classList.add("active");
     userInput.focus();
     haptics.light();
   });
 }
 
-function showTyping() { typingEl.classList.add('active'); messagesDiv.scrollTop = messagesDiv.scrollHeight; }
-function hideTyping() { typingEl.classList.remove('active'); }
+function showTyping() { typingEl.classList.add("active"); messagesDiv.scrollTop = messagesDiv.scrollHeight; }
+function hideTyping() { typingEl.classList.remove("active"); }
 
-/* ============================================================
-   [18] STREAMING
-   ============================================================ */
-async function streamText(bubble, fullText, speed = 16) {
-  bubble.classList.add('streaming');
-  bubble.textContent = '';
-  const chars = [...fullText];
-  for (let i = 0; i < chars.length; i++) {
-    bubble.textContent += chars[i];
-    if (i % 3 === 0) messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    await sleep(speed + Math.random() * 15);
+// ============================================================
+// [19] CANVAS BACKGROUND
+// ============================================================
+(function () {
+  const canvas = $("neural-canvas");
+  const ctx = canvas.getContext("2d");
+  let w, h, particles = [];
+  const P_COUNT = Math.min(45, Math.floor(window.innerWidth / 32));
+  const LINK_DIST = 130;
+  function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+  function P() { this.x = Math.random() * w; this.y = Math.random() * h; this.vx = (Math.random() - .5) * .32; this.vy = (Math.random() - .5) * .32; this.r = Math.random() * 1.5 + .6; }
+  function init() { resize(); particles = []; for (let i = 0; i < P_COUNT; i++) particles.push(new P()); }
+  let mouse = { x: -1000, y: -1000 };
+  window.addEventListener("mousemove", e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  function tick() {
+    ctx.clearRect(0, 0, w, h);
+    const light = document.documentElement.getAttribute("data-theme") === "light";
+    const c = light ? "139,26,26" : "201,48,48";
+    for (const p of particles) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+      const dx = mouse.x - p.x, dy = mouse.y - p.y;
+      const d = Math.hypot(dx, dy);
+      if (d < 200 && d > 0) { p.vx += (dx / d) * .008; p.vy += (dy / d) * .008; }
+      p.vx = Math.max(-1.2, Math.min(1.2, p.vx));
+      p.vy = Math.max(-1.2, Math.min(1.2, p.vy));
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${c},.6)`; ctx.fill();
+    }
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i], b = particles[j];
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < LINK_DIST) {
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(${c},${(1 - d / LINK_DIST) * .35})`;
+          ctx.lineWidth = .6; ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(tick);
   }
-  bubble.classList.remove('streaming');
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
+  init(); window.addEventListener("resize", init); tick();
+})();
 
-/* ============================================================
-   [19] BOOT
-   ============================================================ */
-function bootConversation() {
-  const g = [
-    "vev-1 هنا. عين رقمية تراقبك من العتمة. شنو تريد؟",
-    "دخلت الظلام. أنا vev-1. اختصر كلامك.",
-    "أنت الآن في حضرة vev-1. تكلم بوضوح.",
-    "العتمة تستقبلك. أنا vev-1. شنو عندك؟"
-  ];
-  setTimeout(() => addMessage(g[Math.floor(Math.random()*g.length)], 'ai'), 500);
-}
-
-async function loadHistory() {
-  try {
-    const msgs = await loadMessages(LOCAL_UID);
-    if (msgs.length === 0) return false;
-    msgs.forEach(m => {
-      addMessage(m.text, m.type, { replyTo: m.replyTo, image: m.image, persist: false });
-      if (m.type === 'user') history.push({ role: 'user', content: m.text });
-      else if (m.type === 'ai' && m.text !== '.') history.push({ role: 'assistant', content: m.text });
-    });
-    return true;
-  } catch (e) { console.error(e); return false; }
-}
-
-/* ============================================================
-   [20] ATTACH MENU
-   ============================================================ */
-attachBtn.onclick = (e) => {
-  e.stopPropagation();
-  attachMenuOpen = !attachMenuOpen;
-  attachMenu.classList.toggle('open', attachMenuOpen);
-  attachBtn.classList.toggle('rotated', attachMenuOpen);
-  haptics.light();
-};
-document.addEventListener('click', (e) => {
-  if (attachMenuOpen && !attachMenu.contains(e.target) && e.target !== attachBtn) {
-    attachMenuOpen = false;
-    attachMenu.classList.remove('open');
-    attachBtn.classList.remove('rotated');
-  }
-});
-const closeAttach = () => {
-  attachMenuOpen = false;
-  attachMenu.classList.remove('open');
-  attachBtn.classList.remove('rotated');
-};
-$('menu-image').onclick = () => { $('image-input').click(); closeAttach(); };
-$('menu-file').onclick  = () => { $('file-input').click(); closeAttach(); };
-$('menu-export').onclick = () => { exportChat(); closeAttach(); };
-$('menu-reply').onclick = () => {
-  const lastAi = [...messagesDiv.querySelectorAll('.msg-row.ai .bubble')].pop();
-  if (lastAi) {
-    replyContext = lastAi.textContent;
-    $('reply-text').textContent = replyContext.slice(0, 80);
-    $('reply-banner').classList.add('active');
-    userInput.focus();
-  } else toast(T('no_reply'));
-  closeAttach();
-};
-
-/* ============================================================
-   [21] IMAGE / FILE
-   ============================================================ */
-$('image-input').onchange = (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    attachedImage = ev.target.result;
-    $('img-preview-thumb').src = attachedImage;
-    $('img-preview-bar').classList.add('active');
-    haptics.success();
-  };
-  reader.readAsDataURL(file);
-  e.target.value = '';
-};
-$('img-preview-close').onclick = () => {
-  attachedImage = null;
-  $('img-preview-bar').classList.remove('active');
-};
-$('file-input').onchange = async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  try {
-    const text = await file.text();
-    userInput.value = `[${file.name}]\n${text.slice(0, 3000)}`;
-    autoResize();
-    haptics.success();
-  } catch {}
-  e.target.value = '';
-};
-$('reply-close').onclick = () => {
-  replyContext = null;
-  $('reply-banner').classList.remove('active');
-};
-
-/* ============================================================
-   [22] SEND MESSAGE
-   ============================================================ */
+// ============================================================
+// [20] SEND MESSAGE — streaming حقيقي
+// ============================================================
 async function sendMessage() {
   if (isResponding) return;
-  if (keyIsPlaceholder) {
-    toast('⚠️ ضع مفتاح API أولاً — افتح الإعدادات');
-    haptics.error();
-    return;
-  }
+  if (allPlaceholder) { toast("⚠️ ضع مفاتيح API أولاً"); haptics.error(); return; }
   const raw = userInput.value.trim();
   if (!raw && !attachedImage) return;
 
   const text = raw;
   const imageToSend = attachedImage;
 
-  userInput.value = '';
-  autoResize();
+  userInput.value = ""; autoResize();
   attachedImage = null;
-  $('img-preview-bar').classList.remove('active');
+  $("img-preview-bar").classList.remove("active");
 
   const replyTo = replyContext;
   replyContext = null;
-  $('reply-banner').classList.remove('active');
+  $("reply-banner").classList.remove("active");
 
-  addMessage(text || '[صورة]', 'user', { replyTo, image: imageToSend });
+  addMessage(text || "[صورة]", "user", { replyTo, image: imageToSend });
   let fullUser = text;
-  if (replyTo) fullUser = `(رداً على: "${replyTo.slice(0,120)}")\n${text}`;
+  if (replyTo) fullUser = `(رداً على: "${replyTo.slice(0, 120)}")\n${text}`;
   if (imageToSend) fullUser = `[صورة]\n${fullUser}`;
-  history.push({ role: 'user', content: fullUser });
+  history.push({ role: "user", content: fullUser });
+
+  // استخراج حقائق
+  if (text) {
+    const facts = extractFacts(text);
+    for (const f of facts) await memory.addFact(f);
+  }
 
   state.onInteraction();
   updateBadges();
@@ -1259,68 +1274,77 @@ async function sendMessage() {
 
   if (state.isSilent()) {
     await humanDelay(1200, 2800);
-    hideTyping();
-    addMessage('.', 'ai');
-    finishResponse();
-    return;
+    addMessage(".", "ai");
+    finishResponse(); return;
   }
   if (state.isBusy()) {
-    const excuses = [
-      "معذرة، رأسي مشوش هسه. عاودني بعد شوية.",
-      "ما عندي مزاج أحچي. خليني بحالي.",
-      "مشغول. لا تسأل هسه.",
-      "الظلام مزدحم اليوم. ارجع لي بعدين."
-    ];
+    const excuses = ["معذرة، رأسي مشوش هسه.", "ما عندي مزاج أحچي. خليني بحالي.", "مشغول. لا تسأل هسه.", "الظلام مزدحم اليوم."];
     await humanDelay(1500, 3500);
-    hideTyping();
-    addMessage(excuses[Math.floor(Math.random()*excuses.length)], 'ai');
-    finishResponse();
-    return;
+    addMessage(excuses[Math.floor(Math.random() * excuses.length)], "ai");
+    finishResponse(); return;
   }
 
   showTyping();
-  setStatus('testing', 'يفكر...');
-  await humanDelay(1500, 3500);
+  setStatus("testing", "يفكر...");
 
-  const sys = buildPersona(state.trust, state.mood);
-  const apiMessages = [{ role: 'system', content: sys }, ...history.slice(-16)];
+  const topic = classifyTopic(history);
+  const sys = buildPersona(state.trust, state.mood, memory, topic);
+  const apiMessages = history.slice(-CONFIG.historyDepth);
 
   currentAbort = new AbortController();
   try {
-    let reply = await callDeepSeek(apiMessages, 0, currentAbort.signal);
-    setStatus('online', 'متصل');
-    reply = sanitize(reply);
-    reply = reply.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F000}-\u{1F0FF}\u{1F1E0}-\u{1F1FF}]/gu, '').trim();
-    if (!reply) reply = '.';
+    // إنشاء فقاعة فارغة للبث المباشر
+    const row = document.createElement("div");
+    row.className = "msg-row ai"; row.style.position = "relative";
+    const hint = document.createElement("div");
+    hint.className = "swipe-hint"; hint.textContent = "↩";
+    row.appendChild(hint);
+    const bubble = document.createElement("div");
+    bubble.className = "bubble streaming";
+    row.appendChild(bubble);
+    const meta = document.createElement("div");
+    meta.className = "msg-meta";
+    meta.textContent = new Date().toLocaleTimeString(currentLang === "ar" ? "ar" : "en", { hour: "2-digit", minute: "2-digit" });
+    row.appendChild(meta);
+    messagesDiv.appendChild(row);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
     hideTyping();
 
-    if (reply.length > 220 && Math.random() < 0.3 && reply !== '.') {
-      const parts = splitReply(reply);
-      for (let i = 0; i < parts.length; i++) {
-        if (i > 0) { showTyping(); await humanDelay(1200, 2500); hideTyping(); }
-        const bubble = await addMessage('', 'ai', { persist: false });
-        await streamText(bubble, parts[i], 14);
-        await saveMessage(LOCAL_UID, { text: parts[i], type: 'ai' });
-      }
-    } else {
-      const bubble = await addMessage('', 'ai', { persist: false });
-      await streamText(bubble, reply, 16);
-      await saveMessage(LOCAL_UID, { text: reply, type: 'ai' });
-    }
+    let firstToken = true;
+    const onToken = (delta, full) => {
+      if (firstToken) { firstToken = false; haptics.light(); }
+      bubble.textContent = full;
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    };
 
-    history.push({ role: 'assistant', content: reply });
-    if (history.length > 40) history = history.slice(-30);
+    let full = await streamAI(sys, apiMessages, imageToSend, onToken, currentAbort.signal);
+    full = sanitize(full);
+    if (!full) full = ".";
+
+    bubble.classList.remove("streaming");
+    if (full === ".") bubble.classList.add("silence");
+    if (full !== ".") bubble.innerHTML = renderMarkdown(full);
+    else bubble.textContent = ".";
+
+    attachBubbleInteractions(bubble, row, hint);
+    await idbPut(STORE_MSG, { uid: LOCAL_UID, text: full, type: "ai", ts: Date.now() });
+
+    history.push({ role: "assistant", content: full });
+    if (history.length > 60) history = history.slice(-40);
+
+    setStatus("online", "متصل");
+    haptics.success();
+    updateProviderUI();
+
+    if (ttsEnabled && full !== ".") speak(full);
   } catch (err) {
     hideTyping();
-    setStatus('error', 'خطأ');
+    setStatus("error", "خطأ");
     haptics.error();
-    // Show ACTUAL error to user
-    addMessage(`⚠️ ${err.message}`, 'ai');
-    // Log to diagnostic box
-    const box = document.getElementById('diag-box');
-    box.className = 'diag-box err';
-    box.textContent = 'خطأ في الاتصال:\n' + err.message;
+    addMessage(`⚠️ ${err.message}`, "ai");
+    const box = $("diag-box");
+    if (box) { box.className = "diag-box err"; box.textContent = "خطأ: " + err.message; }
   } finally {
     currentAbort = null;
     finishResponse();
@@ -1332,109 +1356,133 @@ function finishResponse() {
   sendBtn.disabled = false;
   userInput.focus();
 }
-
-function splitReply(text) {
-  const sents = text.match(/[^.!؟\n]+[.!؟\n]?/g) || [text];
-  const parts = []; let curr = '';
-  for (const s of sents) {
-    if ((curr + s).length > 200 && curr) { parts.push(curr.trim()); curr = s; }
-    else curr += s;
-  }
-  if (curr.trim()) parts.push(curr.trim());
-  return parts.length > 1 ? parts : [text];
-}
 function autoResize() {
-  userInput.style.height = 'auto';
-  userInput.style.height = Math.min(userInput.scrollHeight, 140) + 'px';
+  userInput.style.height = "auto";
+  userInput.style.height = Math.min(userInput.scrollHeight, 140) + "px";
 }
 
-/* ============================================================
-   [23] TTS
-   ============================================================ */
-let speaking = false;
+// ============================================================
+// [21] TTS + VOICE
+// ============================================================
 function speak(text) {
-  if (!('speechSynthesis' in window) || speaking) return;
+  if (!("speechSynthesis" in window) || speaking) return;
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'ar-SA'; u.rate = 0.95; u.pitch = 0.8;
-  const ar = speechSynthesis.getVoices().find(v => v.lang.startsWith('ar'));
+  u.lang = "ar-SA"; u.rate = 0.95; u.pitch = 0.8;
+  const ar = speechSynthesis.getVoices().find(v => v.lang.startsWith("ar"));
   if (ar) u.voice = ar;
   u.onstart = () => speaking = true;
   u.onend = () => speaking = false;
   u.onerror = () => speaking = false;
   speechSynthesis.speak(u);
 }
-function stopSpeak() { if ('speechSynthesis' in window) { speechSynthesis.cancel(); speaking = false; } }
+function stopSpeak() { if ("speechSynthesis" in window) { speechSynthesis.cancel(); speaking = false; } }
 
-/* ============================================================
-   [24] VOICE INPUT
-   ============================================================ */
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 if (SR) {
   const rec = new SR();
-  rec.lang = 'ar-SA'; rec.interimResults = true; rec.continuous = false;
-  $('mic-btn').onclick = () => {
+  rec.lang = "ar-SA"; rec.interimResults = true; rec.continuous = false;
+  $("mic-btn").onclick = () => {
     if (recording) { rec.stop(); return; }
     try {
-      rec.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
-      rec.start();
-      recording = true;
-      $('mic-btn').classList.add('recording');
-      toast(T('mic_start'));
+      rec.lang = currentLang === "ar" ? "ar-SA" : "en-US";
+      rec.start(); recording = true;
+      $("mic-btn").classList.add("recording");
+      toast(T("mic_start"));
       haptics.medium();
-    } catch (e) { console.error(e); }
+    } catch (e) {}
   };
-  rec.onresult = (e) => {
-    let t = '';
+  rec.onresult = e => {
+    let t = "";
     for (let i = e.resultIndex; i < e.results.length; i++) t += e.results[i][0].transcript;
-    userInput.value = t;
-    autoResize();
+    userInput.value = t; autoResize();
   };
-  rec.onend = () => { recording = false; $('mic-btn').classList.remove('recording'); haptics.light(); };
-  rec.onerror = () => { recording = false; $('mic-btn').classList.remove('recording'); };
-} else {
-  $('mic-btn').style.display = 'none';
-}
+  rec.onend = () => { recording = false; $("mic-btn").classList.remove("recording"); };
+  rec.onerror = () => { recording = false; $("mic-btn").classList.remove("recording"); };
+} else { $("mic-btn").style.display = "none"; }
 
-/* ============================================================
-   [25] EVENTS
-   ============================================================ */
-sendBtn.onclick = sendMessage;
-userInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+// ============================================================
+// [22] FILES / IMAGES
+// ============================================================
+attachBtn.onclick = e => {
+  e.stopPropagation();
+  attachMenuOpen = !attachMenuOpen;
+  attachMenu.classList.toggle("open", attachMenuOpen);
+  attachBtn.classList.toggle("rotated", attachMenuOpen);
+  haptics.light();
+};
+document.addEventListener("click", e => {
+  if (attachMenuOpen && !attachMenu.contains(e.target) && e.target !== attachBtn) {
+    attachMenuOpen = false; attachMenu.classList.remove("open"); attachBtn.classList.remove("rotated");
+  }
 });
-userInput.addEventListener('input', autoResize);
+const closeAttach = () => { attachMenuOpen = false; attachMenu.classList.remove("open"); attachBtn.classList.remove("rotated"); };
+$("menu-image").onclick = () => { $("image-input").click(); closeAttach(); };
+$("menu-file").onclick = () => { $("file-input").click(); closeAttach(); };
+$("menu-export").onclick = () => { exportChat(); closeAttach(); };
+$("menu-reply").onclick = () => {
+  const lastAi = [...messagesDiv.querySelectorAll(".msg-row.ai .bubble")].pop();
+  if (lastAi) {
+    replyContext = lastAi.textContent;
+    $("reply-text").textContent = replyContext.slice(0, 80);
+    $("reply-banner").classList.add("active");
+    userInput.focus();
+  } else toast(T("no_reply"));
+  closeAttach();
+};
+$("image-input").onchange = e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    attachedImage = ev.target.result;
+    $("img-preview-thumb").src = attachedImage;
+    $("img-preview-bar").classList.add("active");
+    haptics.success();
+  };
+  reader.readAsDataURL(file);
+  e.target.value = "";
+};
+$("img-preview-close").onclick = () => { attachedImage = null; $("img-preview-bar").classList.remove("active"); };
+$("file-input").onchange = async e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  try {
+    const text = await file.text();
+    userInput.value = `[${file.name}]\n${text.slice(0, 3000)}`;
+    autoResize();
+    haptics.success();
+  } catch (e) {}
+  e.target.value = "";
+};
+$("reply-close").onclick = () => { replyContext = null; $("reply-banner").classList.remove("active"); };
 
-/* ============================================================
-   [26] SHEETS + DRAG TO DISMISS
-   ============================================================ */
+// ============================================================
+// [23] EVENTS
+// ============================================================
+sendBtn.onclick = sendMessage;
+userInput.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
+userInput.addEventListener("input", autoResize);
+
+// ============================================================
+// [24] SHEETS
+// ============================================================
 function openSheet(id) {
   closeAllSheets();
-  document.getElementById(id).classList.add('open');
-  overlay.classList.add('active');
+  document.getElementById(id).classList.add("open");
+  overlay.classList.add("active");
   haptics.light();
 }
 function closeAllSheets() {
-  document.querySelectorAll('.sheet').forEach(s => {
-    s.classList.remove('open');
-    s.style.transform = '';
-  });
-  overlay.classList.remove('active');
+  document.querySelectorAll(".sheet").forEach(s => { s.classList.remove("open"); s.style.transform = ""; });
+  overlay.classList.remove("active");
 }
 overlay.onclick = closeAllSheets;
 
-// Drag-to-dismiss on handle
-document.querySelectorAll('[data-drag]').forEach(handle => {
-  const sheet = handle.closest('.sheet');
+document.querySelectorAll("[data-drag]").forEach(handle => {
+  const sheet = handle.closest(".sheet");
   let startY = 0, currentY = 0, dragging = false;
-
-  const onStart = (e) => {
-    startY = (e.touches?.[0] || e).clientY;
-    currentY = 0;
-    dragging = true;
-    sheet.classList.add('dragging');
-    haptics.selection();
-  };
-  const onMove = (e) => {
+  const onStart = e => { startY = (e.touches?.[0] || e).clientY; currentY = 0; dragging = true; };
+  const onMove = e => {
     if (!dragging) return;
     currentY = (e.touches?.[0] || e).clientY - startY;
     if (currentY > 0) sheet.style.transform = `translateY(${currentY}px)`;
@@ -1442,98 +1490,167 @@ document.querySelectorAll('[data-drag]').forEach(handle => {
   const onEnd = () => {
     if (!dragging) return;
     dragging = false;
-    sheet.classList.remove('dragging');
-    if (currentY > 100) {
-      closeAllSheets();
-      haptics.medium();
-    } else {
-      sheet.style.transform = '';
-    }
+    if (currentY > 100) { closeAllSheets(); haptics.medium(); }
+    else sheet.style.transform = "";
     currentY = 0;
   };
-
-  handle.addEventListener('touchstart', onStart, { passive: true });
-  handle.addEventListener('touchmove', onMove, { passive: true });
-  handle.addEventListener('touchend', onEnd);
-  handle.addEventListener('mousedown', onStart);
-  handle.addEventListener('mousemove', onMove);
-  handle.addEventListener('mouseup', onEnd);
-  handle.addEventListener('mouseleave', onEnd);
+  handle.addEventListener("touchstart", onStart, { passive: true });
+  handle.addEventListener("touchmove", onMove, { passive: true });
+  handle.addEventListener("touchend", onEnd);
+  handle.addEventListener("mousedown", onStart);
+  handle.addEventListener("mousemove", onMove);
+  handle.addEventListener("mouseup", onEnd);
+  handle.addEventListener("mouseleave", onEnd);
 });
 
-$('settings-btn').onclick = () => openSheet('settings-sheet');
-$('set-language').onclick = () => openSheet('language-sheet');
-$('set-close').onclick = closeAllSheets;
-document.querySelectorAll('[data-lang]').forEach(el => {
+$("settings-btn").onclick = () => { openSheet("settings-sheet"); updateProviderUI(); renderMemoryList(); };
+$("set-language").onclick = () => openSheet("language-sheet");
+$("set-close").onclick = closeAllSheets;
+document.querySelectorAll("[data-lang]").forEach(el => {
   el.onclick = () => {
     currentLang = el.dataset.lang;
-    localStorage.setItem('vev_lang', currentLang);
+    localStorage.setItem("vev_lang", currentLang);
     applyI18n();
     closeAllSheets();
-    toast(T('lang_changed'));
+    toast(T("lang_changed"));
     haptics.success();
   };
 });
-$('set-theme').onclick = () => { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); haptics.light(); };
-$('set-tts').onclick = () => {
+
+// ============================================================
+// [25] SETTINGS ACTIONS
+// ============================================================
+$("set-theme").onclick = () => { applyTheme(currentTheme === "dark" ? "light" : "dark"); haptics.light(); };
+$("set-tts").onclick = () => {
   ttsEnabled = !ttsEnabled;
-  localStorage.setItem('vev_tts', ttsEnabled ? '1' : '0');
-  $('tts-toggle').classList.toggle('on', ttsEnabled);
+  localStorage.setItem("vev_tts", ttsEnabled ? "1" : "0");
+  $("tts-toggle").classList.toggle("on", ttsEnabled);
   if (!ttsEnabled) stopSpeak();
   haptics.light();
 };
-$('set-haptics').onclick = () => {
+$("set-haptics").onclick = () => {
   hapticsEnabled = !hapticsEnabled;
-  localStorage.setItem('vev_haptics', hapticsEnabled ? '1' : '0');
-  $('haptics-toggle').classList.toggle('on', hapticsEnabled);
+  localStorage.setItem("vev_haptics", hapticsEnabled ? "1" : "0");
+  $("haptics-toggle").classList.toggle("on", hapticsEnabled);
   haptics.medium();
 };
-$('set-export').onclick = () => { exportChat(); closeAllSheets(); };
-$('set-clear').onclick = async () => {
-  messagesDiv.innerHTML = '';
-  history = [];
-  try { await clearMessages(LOCAL_UID); } catch {}
+$("set-export").onclick = () => { exportChat(); closeAllSheets(); };
+$("set-clear").onclick = async () => {
+  messagesDiv.innerHTML = ""; history = [];
+  try { await idbClear(STORE_MSG, LOCAL_UID); } catch (e) {}
   bootConversation();
-  toast(T('cleared'));
-  closeAllSheets();
-  haptics.warning();
+  toast(T("cleared")); closeAllSheets(); haptics.warning();
 };
-$('set-reset-trust').onclick = () => {
-  state.reset(); updateBadges();
-  closeAllSheets();
-  haptics.success();
-};
-$('set-reset-all').onclick = async () => {
-  if (!confirm(T('reset_confirm'))) return;
-  try { await clearMessages(LOCAL_UID); } catch {}
+$("set-reset-trust").onclick = () => { state.reset(); updateBadges(); closeAllSheets(); haptics.success(); };
+$("set-reset-all").onclick = async () => {
+  if (!confirm(T("reset_confirm"))) return;
+  try { await idbClear(STORE_MSG, LOCAL_UID); } catch (e) {}
   localStorage.clear();
-  toast(T('reset_all'));
+  toast(T("reset_all"));
   setTimeout(() => location.reload(), 800);
 };
 
-/* ============================================================
-   [27] SEARCH
-   ============================================================ */
+// Proxy
+$("save-proxy-btn").onclick = () => {
+  const v = $("proxy-input").value.trim();
+  CONFIG.proxyUrl = v;
+  localStorage.setItem("vev_proxy", v);
+  toast(T("save_proxy"));
+  haptics.success();
+};
+
+// Memory
+async function renderMemoryList() {
+  const list = $("memory-list");
+  if (memory.facts.length === 0) { list.textContent = "لا يوجد شيء بعد"; return; }
+  list.textContent = memory.facts.map(f => "• " + f.text).join("\n");
+}
+$("clear-memory-btn").onclick = async () => {
+  await memory.clear();
+  renderMemoryList();
+  toast(T("memory_cleared"));
+  haptics.warning();
+};
+
+// ============================================================
+// [26] DIAGNOSTIC TEST
+// ============================================================
+$("test-api-btn").onclick = async () => {
+  const box = $("diag-box");
+  box.className = "diag-box"; box.textContent = "جاري الاختبار...";
+  setStatus("testing", "يختبر...");
+  let out = "", anyOk = false;
+
+  // DeepSeek
+  for (const k of CONFIG.deepseek.keys) {
+    if (isPlaceholder(k)) { out += `⚠️ DeepSeek: مفتاح placeholder\n`; continue; }
+    try {
+      const start = Date.now();
+      const res = await fetch(CONFIG.proxyUrl || CONFIG.deepseek.endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${k}` },
+        body: JSON.stringify({
+          model: CONFIG.deepseek.model,
+          messages: [{ role: "user", content: "قل: تم" }],
+          max_tokens: 10
+        })
+      });
+      const el = Date.now() - start;
+      if (res.ok) { out += `✅ DeepSeek ${k.slice(-6)}: نجح (${el}ms)\n`; anyOk = true; }
+      else { const b = await res.text(); out += `❌ DeepSeek ${k.slice(-6)}: HTTP ${res.status}\n${b.slice(0, 150)}\n`; }
+    } catch (e) { out += `❌ DeepSeek: ${e.message}\n`; }
+  }
+
+  // Gemini
+  for (const k of CONFIG.gemini.keys) {
+    if (isPlaceholder(k)) { out += `⚠️ Gemini: مفتاح placeholder\n`; continue; }
+    try {
+      const start = Date.now();
+      const url = CONFIG.proxyUrl || `${CONFIG.gemini.endpointBase}/${CONFIG.gemini.model}:generateContent?key=${encodeURIComponent(k)}`;
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ role: "user", parts: [{ text: "قل: تم" }] }],
+          generationConfig: { maxOutputTokens: 10 }
+        })
+      });
+      const el = Date.now() - start;
+      if (res.ok) { out += `✅ Gemini ${k.slice(-6)}: نجح (${el}ms)\n`; anyOk = true; }
+      else { const b = await res.text(); out += `❌ Gemini ${k.slice(-6)}: HTTP ${res.status}\n${b.slice(0, 150)}\n`; }
+    } catch (e) { out += `❌ Gemini: ${e.message}\n`; }
+  }
+
+  box.innerHTML = out;
+  box.className = "diag-box " + (anyOk ? "ok" : "err");
+  setStatus(anyOk ? "online" : "error", anyOk ? "متصل" : "فشل");
+  updateProviderUI();
+  haptics[anyOk ? "success" : "error"]();
+};
+
+// ============================================================
+// [27] SEARCH / EXPORT / CONTEXT / KEYBOARD
+// ============================================================
 function toggleSearch() {
   searchActive = !searchActive;
-  $('search-bar').classList.toggle('active', searchActive);
-  if (searchActive) $('search-input').focus(); else clearHighlight();
+  $("search-bar").classList.toggle("active", searchActive);
+  if (searchActive) $("search-input").focus(); else clearHighlight();
   haptics.light();
 }
 function clearHighlight() {
-  document.querySelectorAll('.highlight').forEach(el => {
+  document.querySelectorAll(".highlight").forEach(el => {
     const p = el.parentNode;
     p.replaceChild(document.createTextNode(el.textContent), el);
     p.normalize();
   });
-  $('search-count').textContent = '';
+  $("search-count").textContent = "";
 }
 function performSearch(q) {
   clearHighlight();
-  if (!q.trim()) { $('search-count').textContent = ''; return; }
+  if (!q.trim()) { $("search-count").textContent = ""; return; }
   let count = 0;
-  const bubbles = messagesDiv.querySelectorAll('.bubble');
-  const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+  const bubbles = messagesDiv.querySelectorAll(".bubble");
+  const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
   bubbles.forEach(b => {
     const walker = document.createTreeWalker(b, NodeFilter.SHOW_TEXT);
     const nodes = []; let node;
@@ -1546,8 +1663,8 @@ function performSearch(q) {
       let last = 0, m;
       while ((m = re.exec(txt)) !== null) {
         frag.appendChild(document.createTextNode(txt.slice(last, m.index)));
-        const span = document.createElement('span');
-        span.className = 'highlight'; span.textContent = m[0];
+        const span = document.createElement("span");
+        span.className = "highlight"; span.textContent = m[0];
         frag.appendChild(span);
         last = m.index + m[0].length; count++;
       }
@@ -1555,125 +1672,146 @@ function performSearch(q) {
       n.parentNode.replaceChild(frag, n);
     });
   });
-  $('search-count').textContent = count ? `${count}` : '0';
-  const first = messagesDiv.querySelector('.highlight');
-  if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  $("search-count").textContent = count ? `${count}` : "0";
+  const first = messagesDiv.querySelector(".highlight");
+  if (first) first.scrollIntoView({ behavior: "smooth", block: "center" });
 }
-$('search-btn').onclick = toggleSearch;
-$('search-close').onclick = toggleSearch;
-$('search-input').addEventListener('input', e => performSearch(e.target.value));
+$("search-btn").onclick = toggleSearch;
+$("search-close").onclick = toggleSearch;
+$("search-input").addEventListener("input", e => performSearch(e.target.value));
 
-/* ============================================================
-   [28] EXPORT
-   ============================================================ */
 function exportChat() {
   const data = {
-    exported: new Date().toISOString(),
-    app: 'VEV-1',
-    uid: LOCAL_UID,
-    messages: [...messagesDiv.querySelectorAll('.msg-row')].map(r => ({
-      type: r.classList.contains('user') ? 'user' : 'ai',
-      text: r.querySelector('.bubble')?.textContent || '',
-      time: r.querySelector('.msg-meta')?.textContent || ''
+    exported: new Date().toISOString(), app: "VEV-1", uid: LOCAL_UID,
+    facts: memory.facts,
+    messages: [...messagesDiv.querySelectorAll(".msg-row")].map(r => ({
+      type: r.classList.contains("user") ? "user" : "ai",
+      text: r.querySelector(".bubble")?.textContent || "",
+      time: r.querySelector(".msg-meta")?.textContent || ""
     }))
   };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url; a.download = `vev1-chat-${Date.now()}.json`; a.click();
   URL.revokeObjectURL(url);
-  toast(T('exported'));
+  toast(T("exported"));
   haptics.success();
 }
 
-/* ============================================================
-   [29] CONTEXT MENU
-   ============================================================ */
 function showContextMenu(x, y, bubble, row) {
   contextTarget = { bubble, row };
-  const menu = $('ctx-menu');
-  menu.classList.add('open');
-  menu.style.left = Math.min(x, window.innerWidth - 190) + 'px';
-  menu.style.top = Math.min(y, window.innerHeight - 210) + 'px';
+  const menu = $("ctx-menu");
+  menu.classList.add("open");
+  menu.style.left = Math.min(x, window.innerWidth - 190) + "px";
+  menu.style.top = Math.min(y, window.innerHeight - 210) + "px";
   setTimeout(() => {
-    const close = (e) => {
+    const close = e => {
       if (!menu.contains(e.target)) {
-        menu.classList.remove('open');
-        document.removeEventListener('click', close);
-        document.removeEventListener('touchstart', close);
+        menu.classList.remove("open");
+        document.removeEventListener("click", close);
+        document.removeEventListener("touchstart", close);
       }
     };
-    document.addEventListener('click', close);
-    document.addEventListener('touchstart', close);
+    document.addEventListener("click", close);
+    document.addEventListener("touchstart", close);
   }, 100);
 }
-$('ctx-menu').querySelectorAll('.ctx-item').forEach(item => {
+$("ctx-menu").querySelectorAll(".ctx-item").forEach(item => {
   item.onclick = async () => {
     const act = item.dataset.act;
     if (!contextTarget) return;
     const { bubble, row } = contextTarget;
     const text = bubble.textContent;
-    if (act === 'copy') {
-      try { await navigator.clipboard.writeText(text); toast(T('copied')); haptics.success(); } catch {}
-    } else if (act === 'reply') {
+    if (act === "copy") {
+      try { await navigator.clipboard.writeText(text); toast(T("copied")); haptics.success(); } catch (e) {}
+    } else if (act === "reply") {
       replyContext = text;
-      $('reply-text').textContent = text.slice(0, 80);
-      $('reply-banner').classList.add('active');
+      $("reply-text").textContent = text.slice(0, 80);
+      $("reply-banner").classList.add("active");
       userInput.focus();
-      haptics.light();
-    } else if (act === 'speak') {
-      speak(text);
-    } else if (act === 'delete') {
-      row.style.transition = 'opacity .3s, transform .3s';
-      row.style.opacity = '0';
-      row.style.transform = 'translateX(-20px)';
+    } else if (act === "speak") { speak(text); }
+    else if (act === "delete") {
+      row.style.transition = "opacity .3s, transform .3s";
+      row.style.opacity = "0"; row.style.transform = "translateX(-20px)";
       setTimeout(() => row.remove(), 300);
       haptics.warning();
     }
-    $('ctx-menu').classList.remove('open');
+    $("ctx-menu").classList.remove("open");
   };
 });
 
-/* ============================================================
-   [30] KEYBOARD
-   ============================================================ */
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
     closeAllSheets();
     if (searchActive) toggleSearch();
-    $('ctx-menu').classList.remove('open');
+    $("ctx-menu").classList.remove("open");
   }
 });
 
-/* ============================================================
-   [31] SCROLL TO BOTTOM
-   ============================================================ */
-messagesDiv.addEventListener('scroll', () => {
+messagesDiv.addEventListener("scroll", () => {
   const nearBottom = messagesDiv.scrollHeight - messagesDiv.scrollTop - messagesDiv.clientHeight < 100;
-  $('scroll-bottom').classList.toggle('visible', !nearBottom);
+  $("scroll-bottom").classList.toggle("visible", !nearBottom);
 });
-$('scroll-bottom').onclick = () => messagesDiv.scrollTo({ top: messagesDiv.scrollHeight, behavior: 'smooth' });
+$("scroll-bottom").onclick = () => messagesDiv.scrollTo({ top: messagesDiv.scrollHeight, behavior: "smooth" });
 
-/* ============================================================
-   [32] INIT
-   ============================================================ */
-applyI18n();
-applyTheme(currentTheme);
-$('tts-toggle').classList.toggle('on', ttsEnabled);
-$('haptics-toggle').classList.toggle('on', hapticsEnabled);
-updateBadges();
-
-if ('speechSynthesis' in window) {
-  speechSynthesis.getVoices();
-  speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+// ============================================================
+// [28] INIT
+// ============================================================
+function applyTheme(theme) {
+  currentTheme = theme;
+  localStorage.setItem("vev_theme", theme);
+  document.documentElement.setAttribute("data-theme", theme === "light" ? "light" : "");
+  $("theme-toggle").classList.toggle("on", theme === "dark");
+  document.querySelector('meta[name="theme-color"]').setAttribute("content", theme === "light" ? "#eef0f5" : "#05050a");
+}
+function applyI18n() {
+  $("typing-text").textContent = T("typing");
+  $("cur-lang").textContent = currentLang === "ar" ? "العربية" : "English";
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
 }
 
-if (!keyIsPlaceholder) setStatus('online', 'جاهز');
+function bootConversation() {
+  const g = [
+    "vev-1 هنا. عين رقمية تراقبك من العتمة. شنو تريد؟",
+    "دخلت الظلام. أنا vev-1. اختصر كلامك.",
+    "أنت الآن في حضرة vev-1. تكلم بوضوح.",
+    "العتمة تستقبلك. أنا vev-1. شنو عندك؟"
+  ];
+  setTimeout(() => addMessage(g[Math.floor(Math.random() * g.length)], "ai"), 500);
+}
+
+async function loadHistory() {
+  try {
+    const msgs = await idbGetAll(STORE_MSG, LOCAL_UID);
+    if (msgs.length === 0) return false;
+    msgs.forEach(m => {
+      addMessage(m.text, m.type, { replyTo: m.replyTo, image: m.image, persist: false });
+      if (m.type === "user") history.push({ role: "user", content: m.text });
+      else if (m.type === "ai" && m.text !== ".") history.push({ role: "assistant", content: m.text });
+    });
+    return true;
+  } catch (e) { return false; }
+}
 
 (async () => {
+  applyI18n();
+  applyTheme(currentTheme);
+  $("tts-toggle").classList.toggle("on", ttsEnabled);
+  $("haptics-toggle").classList.toggle("on", hapticsEnabled);
+  $("proxy-input").value = CONFIG.proxyUrl;
+  updateBadges();
+  updateProviderUI();
+  if (allPlaceholder) $("setup-banner").style.display = "block";
+  if ("speechSynthesis" in window) {
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+  }
   await openDB();
-  const hasHistory = await loadHistory();
-  if (!hasHistory) bootConversation();
+  await memory.load();
+  const has = await loadHistory();
+  if (!has) bootConversation();
 })();
 </script>
 </body>
